@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './auth.guard';
+import { SellersResolve } from './sellers.resolve';
 
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LoginComponent } from './login/login.component';
@@ -17,7 +18,12 @@ const routes: Routes = [
   { path: 'sellers/new',  component: SellerNewComponent },
   { path: 'sellers', canActivate: [AuthGuard],
     children: [
-      { path: '', component: SellerIndexComponent },
+      { 
+        path: '', component: SellerIndexComponent,      
+        resolve: {
+          sellers: SellersResolve,
+        } 
+      },
     ]
   },
   { path: '**', component: Error404Component },

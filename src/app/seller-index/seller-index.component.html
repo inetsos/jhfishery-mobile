@@ -7,7 +7,7 @@
         <div class="noData" colspan=100> There is no seller yet.</div>
       </ng-container>
         <li *ngFor="let seller of sellers">
-          <a [routerLink]="['/','sellers', seller.userID]">{{seller.userID}}</a>
+          <a [routerLink]="['/','sellers', seller.userID]">{{seller.storeName}}</a>
         </li>
     </ul>
   </div>

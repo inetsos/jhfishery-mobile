@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule }    from './app-routing.module';
 import { AuthGuard } from './auth.guard';
+import { SellersResolve } from './sellers.resolve';
 
 import { UtilService } from './util.service';
 import { AuthService } from './auth.service';
@@ -41,6 +42,7 @@ import { SellerIndexComponent } from './seller-index/seller-index.component';
     UtilService,
     AuthService,
     SellerService,
+    SellersResolve
   ],
   bootstrap: [AppComponent]
 })
