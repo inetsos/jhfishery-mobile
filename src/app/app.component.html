@@ -18,18 +18,20 @@
             
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li [routerLinkActive]="['active']">
-              <a [routerLink]="['/','login']">로그인</a>
-            </li>
-            <li [routerLinkActive]="['active']">
-              <a [routerLink]="['/','sellers']">영업인</a>
-            </li>
-            <li [routerLinkActive]="['active']">
-              <a [routerLink]="['/','users','new']">등록</a>
-            </li>
-            <li>
-              <a>로그아웃</a>
-            </li>
+            <ul class="nav navbar-nav navbar-right">
+              <li [routerLinkActive]="['active']">
+                <a [routerLink]="['/','sellers']">영업인</a>
+              </li>
+              <li *ngIf="!authService.isLoggedIn()" [routerLinkActive]="['active']"> <!-- 1 -->
+                <a [routerLink]="['/','login']">로그인</a>
+              </li>
+              <li *ngIf="!authService.isLoggedIn()" [routerLinkActive]="['active']"> <!-- 1 -->
+                <a [routerLink]="['/','users','new']">등록</a>
+              </li>
+              <li *ngIf="authService.isLoggedIn()">  <!-- 1 -->
+                <a (click)="authService.logout()">로그아웃</a>
+              </li>
+            </ul>
           </ul>
         </div>
         
