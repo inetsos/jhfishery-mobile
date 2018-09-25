@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatProgressBarModule } from '@angular/material';
 
 import { AppRoutingModule }    from './app-routing.module';
 import { AuthGuard } from './auth.guard';
@@ -31,6 +32,7 @@ import { SellerIndexComponent } from './seller-index/seller-index.component';
   imports: [
     BrowserModule, AppRoutingModule, 
     HttpClientModule, FormsModule, ReactiveFormsModule,
+    MatProgressBarModule,
   ],
   providers: [
     {
