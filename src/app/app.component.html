@@ -26,7 +26,7 @@
                 <a [routerLink]="['/','login']">로그인</a>
               </li>
               <li *ngIf="!authService.isLoggedIn()" [routerLinkActive]="['active']"> <!-- 1 -->
-                <a [routerLink]="['/','users','new']">등록</a>
+                <a [routerLink]="['/','sellers','new']">등록</a>
               </li>
               <li *ngIf="authService.isLoggedIn()">  <!-- 1 -->
                 <a (click)="authService.logout()">로그아웃</a>

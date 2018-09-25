@@ -8,18 +8,21 @@ import { AppRoutingModule }    from './app-routing.module';
 import { UtilService } from './util.service';
 import { AuthService } from './auth.service';
 import { RequestInterceptorService } from './request-interceptor.service';
+import { SellerService } from './seller.service';
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { Error404Component } from './error404/error404.component';
 import { LoginComponent } from './login/login.component';
+import { SellerNewComponent } from './seller-new/seller-new.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
     Error404Component,
-    LoginComponent
+    LoginComponent,
+    SellerNewComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, 
@@ -33,6 +36,7 @@ import { LoginComponent } from './login/login.component';
     },
     UtilService,
     AuthService,
+    SellerService,
   ],
   bootstrap: [AppComponent]
 })
