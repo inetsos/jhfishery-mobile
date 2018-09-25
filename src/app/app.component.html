@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="row">
+    <nav class="navbar navbar-default navbar-custom">
+      <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a [routerLink]="['/']" class="navbar-brand">(주)대구종합수산</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li [routerLinkActive]="['active']">
+              <a [routerLink]="['/','login']">로그인</a>
+            </li>
+            <li [routerLinkActive]="['active']">
+              <a [routerLink]="['/','sellers']">영업인</a>
+            </li>
+            <li [routerLinkActive]="['active']">
+              <a [routerLink]="['/','users','new']">등록</a>
+            </li>
+            <li>
+              <a>로그아웃</a>
+            </li>
+          </ul>
+        </div>
+        
+      </div>
+    </nav>
+    <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
