@@ -1,0 +1,15 @@
+<div class="page page-sellers">
+
+  <div class="contentBox">
+    <h3 class="contentBoxTop">영업인</h3>
+    <ul>
+      <ng-container *ngIf="sellers == null || sellers.length == 0">
+        <div class="noData" colspan=100> There is no seller yet.</div>
+      </ng-container>
+        <li *ngFor="let seller of sellers">
+          <a [routerLink]="['/','sellers', seller.userID]">{{seller.userID}}</a>
+        </li>
+    </ul>
+  </div>
+    
+</div>
