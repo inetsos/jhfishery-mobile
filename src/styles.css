@@ -84,3 +84,28 @@ a {
 .page-sellers {
     max-width: 330px;
 }
+ul{
+    margin: 0;
+    padding: 3px 12px;
+}
+ul:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+ul li{
+    display: inline-block;
+    list-style-type: none;
+    float:left;
+}
+ul li a{
+    display: inline-block;
+    text-decoration:none;
+    margin: 3px;
+    background-color: #eee;
+    padding: 3px 10px;
+    border-radius: 3px;
+}
+ul li a:hover{
+    background-color: #ccc;
+}

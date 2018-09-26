@@ -7,6 +7,7 @@ import { MatProgressBarModule } from '@angular/material';
 import { AppRoutingModule }    from './app-routing.module';
 import { AuthGuard } from './auth.guard';
 import { SellersResolve } from './sellers.resolve';
+import { SellerResolve } from './seller.resolve';
 
 import { UtilService } from './util.service';
 import { AuthService } from './auth.service';
@@ -19,6 +20,8 @@ import { Error404Component } from './error404/error404.component';
 import { LoginComponent } from './login/login.component';
 import { SellerNewComponent } from './seller-new/seller-new.component';
 import { SellerIndexComponent } from './seller-index/seller-index.component';
+import { SellerEditComponent } from './seller-edit/seller-edit.component';
+import { SellerShowComponent } from './seller-show/seller-show.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import { SellerIndexComponent } from './seller-index/seller-index.component';
     Error404Component,
     LoginComponent,
     SellerNewComponent,
-    SellerIndexComponent
+    SellerIndexComponent,
+    SellerEditComponent,
+    SellerShowComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, 
@@ -44,7 +49,8 @@ import { SellerIndexComponent } from './seller-index/seller-index.component';
     UtilService,
     AuthService,
     SellerService,
-    SellersResolve
+    SellersResolve,
+    SellerResolve
   ],
   bootstrap: [AppComponent]
 })

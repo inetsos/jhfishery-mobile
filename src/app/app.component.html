@@ -2,6 +2,7 @@
 
 <div class="container-fluid">
   <div class="row">
+    
     <nav class="navbar navbar-default navbar-custom">
       <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
 
@@ -17,24 +18,26 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            
+            <li [routerLinkActive]="['active']">
+              <a [routerLink]="['/','invoices']">송품장</a>
+            </li>
           </ul>
+
           <ul class="nav navbar-nav navbar-right">
-            <ul class="nav navbar-nav navbar-right">
-              <li [routerLinkActive]="['active']">
-                <a [routerLink]="['/','sellers']">영업인</a>
-              </li>
-              <li *ngIf="!authService.isLoggedIn()" [routerLinkActive]="['active']"> <!-- 1 -->
-                <a [routerLink]="['/','login']">로그인</a>
-              </li>
-              <li *ngIf="!authService.isLoggedIn()" [routerLinkActive]="['active']"> <!-- 1 -->
-                <a [routerLink]="['/','sellers','new']">등록</a>
-              </li>
-              <li *ngIf="authService.isLoggedIn()">  <!-- 1 -->
-                <a (click)="authService.logout()">로그아웃</a>
-              </li>
-            </ul>
+            <li [routerLinkActive]="['active']">
+              <a [routerLink]="['/','sellers']">영업인</a>
+            </li>
+            <li *ngIf="!authService.isLoggedIn()" [routerLinkActive]="['active']">
+              <a [routerLink]="['/','login']">로그인</a>
+            </li>
+            <li *ngIf="!authService.isLoggedIn()" [routerLinkActive]="['active']">
+              <a [routerLink]="['/','sellers','new']">등록</a>
+            </li>
+            <li *ngIf="authService.isLoggedIn()">
+              <a (click)="authService.logout()">로그아웃</a>
+            </li>
           </ul>
+
         </div>
         
       </div>
