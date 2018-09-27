@@ -35,6 +35,7 @@ export class AuthService {
               .toPromise()
               .then(this.utilService.checkSuccess)
               .then(response => {
+                //console.log(response);
     		        localStorage.setItem('currentUser', JSON.stringify(response.data));
                 return response.data as Seller
               })

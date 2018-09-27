@@ -8,6 +8,7 @@ import { AppRoutingModule }    from './app-routing.module';
 import { AuthGuard } from './auth.guard';
 import { SellersResolve } from './sellers.resolve';
 import { SellerResolve } from './seller.resolve';
+import { InvoicesResolve } from './invoices.resolve';
 
 import { UtilService } from './util.service';
 import { AuthService } from './auth.service';
@@ -22,6 +23,8 @@ import { SellerNewComponent } from './seller-new/seller-new.component';
 import { SellerIndexComponent } from './seller-index/seller-index.component';
 import { SellerEditComponent } from './seller-edit/seller-edit.component';
 import { SellerShowComponent } from './seller-show/seller-show.component';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { InvoiceUnstoringComponent } from './invoice-unstoring/invoice-unstoring.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import { SellerShowComponent } from './seller-show/seller-show.component';
     SellerNewComponent,
     SellerIndexComponent,
     SellerEditComponent,
-    SellerShowComponent
+    SellerShowComponent,
+    InvoiceComponent,
+    InvoiceUnstoringComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, 
@@ -50,7 +55,8 @@ import { SellerShowComponent } from './seller-show/seller-show.component';
     AuthService,
     SellerService,
     SellersResolve,
-    SellerResolve
+    SellerResolve,
+    InvoicesResolve
   ],
   bootstrap: [AppComponent]
 })
