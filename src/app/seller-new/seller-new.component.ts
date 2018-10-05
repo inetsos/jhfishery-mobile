@@ -52,7 +52,7 @@ export class SellerNewComponent implements OnInit {
     },
   };
  
-  buildForm(): void { //1
+  buildForm(): void { 
     this.form = this.formBuilder.group({
       userID:["", [Validators.required, Validators.pattern(/^.{8,16}$/)]],
       name:[""],

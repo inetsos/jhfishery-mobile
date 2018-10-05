@@ -16,6 +16,7 @@ import { SellerIndexComponent } from './seller-index/seller-index.component';
 import { SellerShowComponent } from './seller-show/seller-show.component';
 import { SellerEditComponent } from './seller-edit/seller-edit.component';
 import { Error404Component } from './error404/error404.component';
+import { InvoiceUnstoringComponent } from './invoice-unstoring/invoice-unstoring.component';
 
 const routes: Routes = [
   { path: '',  component: WelcomeComponent },
@@ -24,10 +25,15 @@ const routes: Routes = [
     children: [
       { 
         path: '', 
-        component: InvoiceComponent,
-        // resolve: { 
-        //   invoices: InvoicesResolve,
-        // } 
+        component: InvoiceComponent
+      }
+    ]
+  },
+  { path: 'unstoring', canActivate: [AuthGuard],
+    children: [      
+      {
+        path: '',
+        component: InvoiceUnstoringComponent
       }
     ]
   },

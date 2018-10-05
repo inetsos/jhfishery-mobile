@@ -1,3 +1,85 @@
-<p>
-  invoice-unstoring works!
-</p>
+<div class="page page-invoices">
+
+  <div class="contentBox">
+    <h3 class="contentBoxTop">매출입력</h3>
+
+    <br/>
+    <div class="container" *ngIf="invoice">
+        <b>{{invoice.in_date}}</b>, {{invoice.deal_type}}, {{invoice.invoice}} <br/>
+        <b>{{invoice.item}}</b>, {{invoice.origin}}, {{invoice.uint}}, {{invoice.quality}}, {{invoice.weight}}<br/>          
+        반입수량: {{invoice.in_number | number}} &nbsp; 금액: {{invoice.in_sum | number}}<br/>
+        판매수량: {{invoice.out_number | number}} &nbsp; 금액: {{invoice.out_sum | number}}<br/>
+        판매일: {{invoice.out_date}} &nbsp; 판매처: {{invoice.out_purchase}}    
+        <hr/>
+        <ng-container *ngFor="let unstoring of invoice.unstoring" >   
+            {{unstoring.outDate}}  {{unstoring.outNumber | number}} 
+            {{unstoring.outSum | number}} {{unstoring.outPurchase}} <br/>            
+        </ng-container>   
+    </div> 
+
+    <!-- 매출일 OutDate, 매출수량 OutNumber, 매출 금액 OutSum, 매출처 OutPurchase -->
+    <!-- Card container that binds all togather -->  
+  <mat-card>  
+    <!-- Actual content starts from here -->  
+    <mat-card-content>  
+      <form [formGroup]="theForm" (ngSubmit)="onFormSubmit(theForm)">  
+          <table>  
+              <tr>  
+                  <td colspan="2">  
+                      <mat-form-field class="demo-full-width">  
+                          <input formControlName="outDate" matInput [matDatepicker]="picker" placeholder="" [(ngModel)]="mydate">  
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>  
+                          <mat-datepicker #picker></mat-datepicker>  
+                      </mat-form-field>  
+                      <mat-error>  
+                          <span *ngIf="!theForm.get('outDate').valid && theForm.get('outDate').touched">날짜를 선택하세요!</span>  
+                      </mat-error>  
+                  </td>  
+              </tr> 
+              <tr>  
+                  <td>  
+                      <mat-form-field class="demo-full-width">  
+                          <input formControlName="outNumber" matInput placeholder="판매수량">  
+                      </mat-form-field>  
+                      <mat-error>  
+                          <span *ngIf="!theForm.get('outNumber').valid && theForm.get('outNumber').touched">판매수량(숫자만)을 입력하세요!!!</span>  
+                      </mat-error>  
+                  </td> 
+              </tr>
+              <tr> 
+                  <td>  
+                      <mat-form-field class="demo-full-width">
+                          <input formControlName="outSum" matInput placeholder="판매금액" >  
+                      </mat-form-field>  
+                      <mat-error>  
+                          <span *ngIf="!theForm.get('outSum').valid && theForm.get('outSum').touched">판매금액(숫자만)을 입력하세요!!!</span>  
+                      </mat-error>  
+                  </td>  
+              </tr>  
+              <tr>  
+                  <td colspan="2">  
+                      <mat-form-field class="demo-full-width">  
+                          <input formControlName="outPurchase" matInput placeholder="판매처" >
+                      </mat-form-field>  
+                      <mat-error>  
+                          <span *ngIf="!theForm.get('outPurchase').valid && theForm.get('outPurchase').touched">판매처를 입력하세요!!!</span>  
+                      </mat-error>  
+                  </td>  
+              </tr>  
+               
+              <tr>  
+                  <td colspan="2" class="content-center">  
+                      <button mat-raised-button color="accent" [disabled]="!theForm.valid">저장</button>  
+                  </td>  
+              </tr>  
+              <tr>  
+                  <td></td>  
+              </tr>  
+          </table>  
+      </form>  
+
+    </mat-card-content>  
+  </mat-card>  
+    
+</div>
+   

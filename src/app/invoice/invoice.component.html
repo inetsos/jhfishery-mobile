@@ -27,7 +27,9 @@
             {{invoice.out_date}}, {{invoice.out_purchase}}<br/>
           </td>
           <td>
-            <button>선택</button>
+            <div class="buttons">
+              <a [routerLink]="['/unstoring']" [queryParams]="{ id : invoice._id }" class="btn btn-default">선택</a>
+            </div>
           </td>
         </tr>
       </tbody>

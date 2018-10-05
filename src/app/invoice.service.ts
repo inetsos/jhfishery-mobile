@@ -24,4 +24,24 @@ export class InvoiceService {
               })
               .catch(this.utilService.handleApiError);
   }
+
+  getitem(id:string): Promise<Invoice> {
+    return this.http.get<ApiResponse>(`${this.apiBaseUrl}/getitem/${id}`)
+              .toPromise()
+              .then(this.utilService.checkSuccess)
+              .then(response => {
+                return response.data as Invoice
+              })
+              .catch(this.utilService.handleApiError);
+  }
+
+  update(id: string, invoice: Invoice): Promise<Invoice> {
+    return this.http.put<ApiResponse>(`${this.apiBaseUrl}/${id}`, invoice)
+              .toPromise()
+              .then(this.utilService.checkSuccess)
+              .then(response => {
+                return response.data as Invoice
+              })
+              .catch(this.utilService.handleApiError);
+  }
 }
