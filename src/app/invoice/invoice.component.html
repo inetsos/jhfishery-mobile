@@ -17,7 +17,8 @@
           <th width="10%">선택</th>
       </tr>
       </thead>
-      <tbody  *ngFor="let invoice of invoices">
+      <tbody>
+        <ng-container *ngFor="let invoice of invoices" >
         <tr>
           <td>
             {{invoice.in_date}}, {{invoice.deal_type}}, {{invoice.invoice}} <br/>
@@ -32,6 +33,10 @@
             </div>
           </td>
         </tr>
+        <ng-container *ngIf>
+
+        </ng-container>
+      </ng-container>
       </tbody>
     </table>
   </div>  
