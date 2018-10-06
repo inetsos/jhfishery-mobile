@@ -5,18 +5,25 @@
 
     <br/>
     <div class="container" *ngIf="invoice">
-        <b>{{invoice.in_date}}</b>, {{invoice.deal_type}}, {{invoice.invoice}} <br/>
+        {{invoice.in_date}}, {{invoice.invoice}}<br/>
+        {{invoice.seller}}, {{invoice.deal_type}} <br/>
         <b>{{invoice.item}}</b>, {{invoice.origin}}, {{invoice.uint}}, {{invoice.quality}}, {{invoice.weight}}<br/>          
-        반입수량: {{invoice.in_number | number}} &nbsp; 금액: {{invoice.in_sum | number}}<br/>
-        판매수량: {{invoice.out_number | number}} &nbsp; 금액: {{invoice.out_sum | number}}<br/>
-        판매일: {{invoice.out_date}} &nbsp; 판매처: {{invoice.out_purchase}}    
-        <hr/>
-        <ng-container *ngFor="let unstoring of invoice.unstoring" >   
-            {{unstoring.outDate}}  {{unstoring.outNumber | number}} 
-            {{unstoring.outSum | number}} {{unstoring.outPurchase}} <br/>            
-        </ng-container>   
-    </div> 
+        {{invoice.in_number | number}}, {{invoice.out_number | number}}, {{invoice.out_sum | number}}<br/>  
 
+        <hr/>
+         
+        <table>  
+            <ng-container  *ngFor="let unstoring of invoice.unstoring">
+            <tr>  
+                <td width="25%">{{unstoring.outDate}}</td>
+                <td width="10%" class="text-right">{{unstoring.outNumber | number}}&nbsp;</td>
+                <td width="25%" class="text-right">{{unstoring.outSum | number}}&nbsp;</td>
+                <td width="40%">{{unstoring.outPurchase}}</td>
+            </tr>
+            </ng-container>
+        </table>
+    </div> 
+    <br/>
     <!-- 매출일 OutDate, 매출수량 OutNumber, 매출 금액 OutSum, 매출처 OutPurchase -->
     <!-- Card container that binds all togather -->  
   <mat-card>  
@@ -25,7 +32,7 @@
       <form [formGroup]="theForm" (ngSubmit)="onFormSubmit(theForm)">  
           <table>  
               <tr>  
-                  <td colspan="2">  
+                  <td>  
                       <mat-form-field class="demo-full-width">  
                           <input formControlName="outDate" matInput [matDatepicker]="picker" placeholder="" [(ngModel)]="mydate">  
                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>  
@@ -57,7 +64,7 @@
                   </td>  
               </tr>  
               <tr>  
-                  <td colspan="2">  
+                  <td>  
                       <mat-form-field class="demo-full-width">  
                           <input formControlName="outPurchase" matInput placeholder="판매처" >
                       </mat-form-field>  
@@ -68,7 +75,7 @@
               </tr>  
                
               <tr>  
-                  <td colspan="2" class="content-center">  
+                  <td class="content-center">  
                       <button mat-raised-button color="accent" [disabled]="!theForm.valid">저장</button>  
                   </td>  
               </tr>  

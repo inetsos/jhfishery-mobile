@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 
 import { NativeDateAdapter, DateAdapter, MAT_DATE_FORMATS } from "@angular/material";
@@ -34,7 +34,7 @@ export class InvoiceUnstoringComponent implements OnInit {
 
   errorResponse: ApiResponse;
   theForm: FormGroup;
-
+  navigationSubscription;
   mydate = new Date();
   // 매출일 OutDate, 매출수량 OutNumber, 매출 금액 OutSum, 매출처 OutPurchase
   outDate: string = ''; // Date = new Date();
@@ -53,12 +53,27 @@ export class InvoiceUnstoringComponent implements OnInit {
         'outPurchase' : [null, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(40)])]
       });  
 
-      this.id = this.route.snapshot.queryParams['id'];
-      this.invoiceService.getitem(this.id).
-      then((data) => {
-        this.invoice = data as Invoice; 
-      })
-      .catch(response => null);
+      this.navigationSubscription = this.router.events.subscribe((e: any) => {
+        // If it is a NavigationEnd event re-initalise the component
+        if (e instanceof NavigationEnd) {
+          this.theForm.reset();          
+          //this.theForm.markAsPristine();
+          //this.theForm.markAsUntouched();
+          this.id = this.route.snapshot.queryParams['id'];
+          this.invoiceService.getitem(this.id).
+          then((data) => {
+            this.invoice = data as Invoice; 
+          })
+          .catch(response => null);
+        }
+      });
+
+      // this.id = this.route.snapshot.queryParams['id'];
+      // this.invoiceService.getitem(this.id).
+      // then((data) => {
+      //   this.invoice = data as Invoice; 
+      // })
+      // .catch(response => null);
     }
 
   ngOnInit() {    
@@ -83,8 +98,14 @@ export class InvoiceUnstoringComponent implements OnInit {
       .then(data => {
         this.invoice.unstoring.push(data._id);
         this.invoiceService.update(this.id, this.invoice )
-        .then(data => {
-          this.router.navigate(['/unstoring'], { queryParams: { id: this.id }});
+        .then(data => { 
+          //console.log(data._id);
+          this.router.navigate(['/unstoring'], { queryParams: { id: data._id }})
+          .then(nav => {
+            console.log(nav);
+          }, err => {
+            console.log(err);
+          });          
         })
         .catch(err => {
           this.errorResponse = err;

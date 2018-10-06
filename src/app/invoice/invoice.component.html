@@ -10,32 +10,37 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th width="90%">반입일자, 거래형태, 송장번호 <br/>
+          <th width="100%">반입일자, 송장번호 <br/>
+              출하자, 거래형태<br/>
               품종, 원산지, 거래단량, 등급, 반입중량 <br/>
-              [입고수량] [매수금액] &nbsp; (출고수량) (매출금액)<br/>
-              매출일, 매출처</th>
-          <th width="10%">선택</th>
+              입고수량, 출고수량, 매출금액
+          </th>
+          <th></th>
       </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let invoice of invoices" >
+        <ng-container *ngFor="let invoice of invoices; let i = index;" >
         <tr>
           <td>
-            {{invoice.in_date}}, {{invoice.deal_type}}, {{invoice.invoice}} <br/>
+            {{invoice.in_date}}, {{invoice.invoice}}<br/>
+            {{invoice.seller}}, {{invoice.deal_type}} <br/>
             {{invoice.item}}, {{invoice.origin}}, {{invoice.uint}}, {{invoice.quality}}, {{invoice.weight}}<br/>          
-            [ {{invoice.in_number | number}} ] [ {{invoice.in_sum | number}} ] &nbsp; 
-            ( {{invoice.out_number | number}} ) ( {{invoice.out_sum | number}} )<br/>
-            {{invoice.out_date}}, {{invoice.out_purchase}}<br/>
+            {{invoice.in_number | number}}, {{invoice.out_number | number}}, {{invoice.out_sum | number}}
           </td>
           <td>
-            <div class="buttons">
               <a [routerLink]="['/unstoring']" [queryParams]="{ id : invoice._id }" class="btn btn-default">선택</a>
-            </div>
           </td>
         </tr>
-        <ng-container *ngIf>
-
+        <ng-container *ngIf = "i < invoices.length-1 && invoices[i].invoice !== invoices[i+1].invoice" >
+          <tr>
+            <td colspan="2"><b>{{invoice.in_sum | number}}</b> </td>
+          </tr>
         </ng-container>
+        <ng-container *ngIf = "i === invoices.length-1" >
+            <tr>
+              <td colspan="2"><b>{{invoice.in_sum | number}}</b> </td>
+            </tr>
+          </ng-container>
       </ng-container>
       </tbody>
     </table>
