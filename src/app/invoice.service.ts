@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { UtilService } from './util.service';
 import { ApiResponse } from './api-response';
 import { Invoice } from './invoice';
+import { InvoiceSimple } from './invoice-simple';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,7 @@ export class InvoiceService {
               .catch(this.utilService.handleApiError);
   }
 
-  update(id: string, invoice: Invoice): Promise<Invoice> {
+  update(id: string, invoice: InvoiceSimple): Promise<Invoice> {
     return this.http.put<ApiResponse>(`${this.apiBaseUrl}/${id}`, invoice)
               .toPromise()
               .then(this.utilService.checkSuccess)

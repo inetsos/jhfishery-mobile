@@ -8,6 +8,7 @@ import { AppDateAdapter, APP_DATE_FORMATS} from '../date.adapter';
 import { ApiResponse } from '../api-response';
 
 import { Invoice } from '../invoice';
+import { InvoiceSimple } from '../invoice-simple';
 import { InvoiceService } from '../invoice.service';
 import { UtilService } from '../util.service';
 import { AuthService } from '../auth.service';
@@ -30,8 +31,11 @@ import { Unstoring } from '../unstoring';
 export class InvoiceUnstoringComponent implements OnInit {
 
   invoice: Invoice;
+  invoiceSimple = {} as InvoiceSimple;
+
   id : string;
-  
+  index: number;
+
   unstorings: Unstoring[] = [];
 
   errorResponse: ApiResponse;
@@ -47,6 +51,8 @@ export class InvoiceUnstoringComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService,
     private invoiceService: InvoiceService, private utilService: UtilService, private formBuilder: FormBuilder,
     private unstoringService: UnstoringService) { 
+
+      
 
       this.theForm = formBuilder.group({  
         'outDate' : [null, Validators.required],  
@@ -71,6 +77,7 @@ export class InvoiceUnstoringComponent implements OnInit {
           this.id = this.route.snapshot.queryParams['id'];
           this.invoiceService.getitem(this.id).
           then((data) => {
+            
             this.invoice = data as Invoice; 
           })
           .catch(response => null);
@@ -86,7 +93,7 @@ export class InvoiceUnstoringComponent implements OnInit {
     }
 
   ngOnInit() {    
-    console.log(this.unstorings);
+    //console.log(this.unstorings);
   }
 
   onFormSubmit(form :FormGroup)  
@@ -106,10 +113,13 @@ export class InvoiceUnstoringComponent implements OnInit {
 
     this.unstoringService.create(form.value)
       .then(data => {
-        this.invoice.unstoring.push(data._id);
-        this.invoiceService.update(this.id, this.invoice )
+        console.log("1.", data._id);
+        this.updateData(data._id);
+        //this.invoiceSimple.unstoring.push(data._id);
+        console.log("2.", this.invoiceSimple);
+        this.invoiceService.update(this.id, this.invoiceSimple )
         .then(data => { 
-          //console.log(data._id);
+          console.log("x >", data._id);
           this.router.navigate(['/unstoring'], { queryParams: { id: data._id }})
           .then(nav => {
             console.log(nav);
@@ -118,35 +128,68 @@ export class InvoiceUnstoringComponent implements OnInit {
           });          
         })
         .catch(err => {
+          console.log("3.", err);
           this.errorResponse = err;
         });        
       })
       .catch(response =>{
+        console.log("4.", response);
         this.errorResponse = response; 
         //this.utilService.handleFormSubmitError(this.errorResponse, form, formErrors);
       });
   }
 
-  trackElement(index: number, element: any) {
-    console.log(element);
-    var unstoring = new unstoring(element);
-    this.unstorings[index] = unstoring;
-    //return element ? element.guid : null;
+  updateData(id: string) {
+    //let count = this.getTotalCount();
+    //let sum = this.getTotalSum();
+
+    console.log(this.invoiceSimple);
+
+    this.invoiceSimple._id = this.invoice._id;
+    this.invoiceSimple.trader = this.invoice.trader;
+    this.invoiceSimple.in_out = this.invoice.in_out;
+    this.invoiceSimple.in_date = this.invoice.in_date;
+    this.invoiceSimple.seller = this.invoice.seller;
+    this.invoiceSimple.deal_type = this.invoice.deal_type;
+    this.invoiceSimple.invoice = this.invoice.invoice;
+    this.invoiceSimple.origin = this.invoice.origin;
+    this.invoiceSimple.item = this.invoice.item;
+    this.invoiceSimple.unit = this.invoice.unit;
+    this.invoiceSimple.quality = this.invoice.quality;
+    this.invoiceSimple.weight = this.invoice.weight;
+    this.invoiceSimple.in_number = this.invoice.in_number;
+    this.invoiceSimple.in_sum = this.invoice.in_sum;
+    this.invoiceSimple.seller_no = this.invoice.seller_no;
+    this.invoiceSimple.out_date = "";
+    this.invoiceSimple.out_number = this.getTotalCount();
+    this.invoiceSimple.out_sum = this.getTotalSum();
+    this.invoiceSimple.out_purchase = "";
+    this.invoiceSimple.unstoring = [] ;
+    
+    let i=0;
+    for(i = 0; i < this.invoice.unstoring.length;i++) {
+      console.log(this.invoice.unstoring[i]._id);
+      this.invoiceSimple.unstoring[i] = this.invoice.unstoring[i]._id;
+    }
+    this.invoiceSimple.unstoring[i] = id; // 매출 id 새로 추가
   }
 
   getTotalCount() {
     let count = 0;
-    // for(let unstoring of this.invoice.unstoring){
-    //   var unstoring = new  Unstoring(unstoring);
-    //   count += unstoring.outNumber;
-    // }
+    let unstoring  = this.invoice.unstoring;
+    for(let i=0; i < unstoring.length;i++){
+      count += unstoring[i].outNumber;
+    }
 
     return count;
   }
 
   getTotalSum() {
     let sum = 0;
-
+    let unstoring  = this.invoice.unstoring;
+    for(let i=0; i < unstoring.length;i++){
+      sum += unstoring[i].outSum;
+    }
     return sum;
   }
 

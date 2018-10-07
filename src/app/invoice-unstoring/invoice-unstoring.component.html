@@ -13,12 +13,12 @@
         <hr/>
          
         <table>  
-            <ng-container  *ngFor="let unstoring of invoice.unstoring; trackBy: trackElement ">
+            <ng-container  *ngFor="let unstoring of invoice.unstoring; let i=index">
             <tr>  
                 <td width="25%">{{unstoring.outDate}}</td>
                 <td width="10%" class="text-right">{{unstoring.outNumber | number}}&nbsp;</td>
                 <td width="25%" class="text-right">{{unstoring.outSum | number}}&nbsp;</td>
-                <td width="40%">{{unstoring.outPurchase}}</td>
+                <td width="40%">{{unstoring.outPurchase}}</td>            
             </tr>            
             </ng-container>
         </table>
