@@ -21,6 +21,14 @@
           </div>
         </div>
 
+        <div class="form-group" [ngClass]="{'has-error': formErrors.sellerNo}">
+          <label for="sellerNo" class="col-sm-3 control-label">영업인번호*</label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" formControlName="sellerNo" id="sellerNo">
+            <span *ngIf="formErrors.sellerNo" class="help-block">{{formErrors.sellerNo}}</span>
+          </div>
+        </div>
+
         <div class="form-group" [ngClass]="{'has-error': formErrors.storeName}">
           <label for="storeName" class="col-sm-3 control-label">상호*</label>
           <div class="col-sm-9">

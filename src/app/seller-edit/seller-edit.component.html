@@ -8,7 +8,7 @@
   
     <form class="user-form form-horizontal" [formGroup]="form" (ngSubmit)="submit()" class="login-form form-horizontal" >
       <div class="contentBox">
-        <h3 class="contentBoxTop">사용자 수정</h3>
+        <h3 class="contentBoxTop">영업인 수정</h3>
 
         <fieldset>
           <div class="form-group" [ngClass]="{'has-error': formErrors.currentPassword}">
@@ -35,7 +35,15 @@
             </div>
           </div>
 
-          <div class="form-group" [ngClass]="{'has-error': formErrors.name}">
+          <div class="form-group" [ngClass]="{'has-error': formErrors.sellerNo}">
+            <label for="sellerNo" class="col-sm-3 control-label">영업인번호*</label>
+            <div class="col-sm-9">
+              <input class="form-control" type="text" formControlName="sellerNo" id="sellerNo">
+              <span *ngIf="formErrors.sellerNo" class="help-block">{{formErrors.sellerNo}}</span>
+            </div>
+          </div>
+
+          <div class="form-group" [ngClass]="{'has-error': formErrors.storeName}">
             <label for="storeName" class="col-sm-3 control-label">상호*</label>
             <div class="col-sm-9">
               <input class="form-control" type="text" formControlName="storeName" id="storeName">

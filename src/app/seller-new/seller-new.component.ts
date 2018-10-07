@@ -20,6 +20,7 @@ export class SellerNewComponent implements OnInit {
   formErrors = {
     'usernID': '',
     'name': '',
+    'sellerNo': '',
     'storeName': '',
     'phone': '',
     'email': '',
@@ -30,6 +31,10 @@ export class SellerNewComponent implements OnInit {
     'usernID': {
       'required': '아이디를 입력하세요.',
       'pattern': '8~16자의 영문 숫자입니다.',
+    },
+    'sellerNo': {
+      'required': '영업인 번호를 입력하세요.',
+      'pattern': '숫자만 입력하세요.',
     },
     'storeName': {
       'required': '송품장의 상호를 입력하세요.',
@@ -56,6 +61,7 @@ export class SellerNewComponent implements OnInit {
     this.form = this.formBuilder.group({
       userID:["", [Validators.required, Validators.pattern(/^.{8,16}$/)]],
       name:[""],
+      sellerNo:[null, [Validators.required, Validators.pattern(/^[0-9]*$/)]],
       storeName:["", [Validators.required, Validators.pattern(/^.{2,40}$/)]],
       phone:["", [Validators.required, Validators.pattern(/^\d{2,3}-\d{3,4}-\d{4}$/)]],
       email:["", [Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],

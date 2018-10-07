@@ -23,6 +23,7 @@ export class SellerEditComponent implements OnInit {
   formErrors = {
     'currentPassword':'',
     'userID':'',
+    'sellerNo': '',
     'storeName':'',
     'phone':'',
     'email':'',
@@ -36,6 +37,10 @@ export class SellerEditComponent implements OnInit {
     },
     'currentPassword': {
       'required': '현재 비밀번호를 입력하세요.',
+    },
+    'sellerNo': {
+      'required': '영업인 번호를 입력하세요.',
+      'pattern': '숫자만 입력하세요.',
     },
     'storeName': {
       'required': '상호를 입력하세요.',
@@ -60,6 +65,7 @@ export class SellerEditComponent implements OnInit {
       currentPassword:["", [Validators.required]],
       userID:[this.seller.userID, [Validators.required, Validators.pattern(/^.{8,16}$/)]],
       name:[this.seller.name],
+      sellerNo:[this.seller.sellerNo, [Validators.required, Validators.pattern(/^[0-9]*$/)]],
       storeName:[this.seller.storeName, [Validators.required, Validators.pattern(/^.{2,40}$/)]],
       phone:[this.seller.phone, [Validators.required, Validators.pattern(/^\d{2,3}-\d{3,4}-\d{4}$/)]],
       email:[this.seller.email, [Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
