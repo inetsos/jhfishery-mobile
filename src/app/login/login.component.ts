@@ -59,7 +59,6 @@ export class LoginComponent implements OnInit {
   submit() {
     this.utilService.makeFormDirtyAndUpdateErrors(this.form, this.formErrors, this.formErrorMessages);
     if(this.form.valid){
-      console.log(this.form.value.userID, this.form.value.password);
       this.authService.login(this.form.value.userID, this.form.value.password)
       .then(data => {
         this.router.navigate([this.redirectTo?this.redirectTo:'/']);

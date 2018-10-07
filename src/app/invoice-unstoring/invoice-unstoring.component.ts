@@ -31,6 +31,8 @@ export class InvoiceUnstoringComponent implements OnInit {
 
   invoice: Invoice;
   id : string;
+  
+  unstorings: Unstoring[] = [];
 
   errorResponse: ApiResponse;
   theForm: FormGroup;
@@ -59,6 +61,13 @@ export class InvoiceUnstoringComponent implements OnInit {
           this.theForm.reset();          
           //this.theForm.markAsPristine();
           //this.theForm.markAsUntouched();
+          this.theForm.setValue({
+            outDate: new Date(), 
+            outNumber: null,
+            outSum: null,
+            outPurchase: ''
+          }); 
+
           this.id = this.route.snapshot.queryParams['id'];
           this.invoiceService.getitem(this.id).
           then((data) => {
@@ -77,6 +86,7 @@ export class InvoiceUnstoringComponent implements OnInit {
     }
 
   ngOnInit() {    
+    console.log(this.unstorings);
   }
 
   onFormSubmit(form :FormGroup)  
@@ -115,6 +125,29 @@ export class InvoiceUnstoringComponent implements OnInit {
         this.errorResponse = response; 
         //this.utilService.handleFormSubmitError(this.errorResponse, form, formErrors);
       });
+  }
+
+  trackElement(index: number, element: any) {
+    console.log(element);
+    var unstoring = new unstoring(element);
+    this.unstorings[index] = unstoring;
+    //return element ? element.guid : null;
+  }
+
+  getTotalCount() {
+    let count = 0;
+    // for(let unstoring of this.invoice.unstoring){
+    //   var unstoring = new  Unstoring(unstoring);
+    //   count += unstoring.outNumber;
+    // }
+
+    return count;
+  }
+
+  getTotalSum() {
+    let sum = 0;
+
+    return sum;
   }
 
    private _to2digit(n: number) {

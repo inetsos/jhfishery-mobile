@@ -14,7 +14,7 @@ import { AuthService } from '../auth.service';
 export class InvoiceComponent implements OnInit {
 
   invoices: Invoice[];
-  storeName : string;
+  sellerNo : number;
 
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService,
     private invoiceService: InvoiceService, private utilService: UtilService) { 
@@ -24,20 +24,19 @@ export class InvoiceComponent implements OnInit {
       if(!this.authService.getCurrentUser()) {
         this.authService.me()
           .then((seller) => {
-            this.storeName = seller.storeName;
+            this.sellerNo = seller.sellerNo;
             this.ngOnInit();
           })
           .catch((err) => console.log(err));
       } else 
-        this.storeName = this.authService.getCurrentUser().storeName;
+        this.sellerNo = this.authService.getCurrentUser().sellerNo;
     }
 
   ngOnInit() {
-    //this.storeName = '(주)해창트레이딩';
-    this.invoiceService.getlist(this.storeName).
+    this.invoiceService.getlist(this.sellerNo).
       then((data) => {
         this.invoices = data as Invoice[]; 
-        this.router.navigate(['/invoices'], { queryParams: { storeName: this.storeName }});
+        this.router.navigate(['/invoices'], { queryParams: { sellerNo: this.sellerNo }});
       })
       .catch(response => null);
   }

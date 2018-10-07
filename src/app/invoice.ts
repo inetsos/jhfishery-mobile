@@ -13,6 +13,7 @@ export interface Invoice {
     weight: string;
     in_number: number;
     in_sum: number;
+    seller_no: number;
     out_date: string;
     out_number: number;
     out_sum: number;

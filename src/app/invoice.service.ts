@@ -15,8 +15,8 @@ export class InvoiceService {
 
   constructor( private http: HttpClient, private utilService: UtilService) { }
 
-  getlist(storeName:string): Promise<Invoice[]> {
-    return this.http.get<ApiResponse>(`${this.apiBaseUrl}/getlist/${storeName}`)
+  getlist(sellerNo:number): Promise<Invoice[]> {
+    return this.http.get<ApiResponse>(`${this.apiBaseUrl}/getlist/${sellerNo}`)
               .toPromise()
               .then(this.utilService.checkSuccess)
               .then(response => {

@@ -6076,7 +6076,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"page page-invoices\">\n\n  <div class=\"contentBox\">\n    <h3 class=\"contentBoxTop\">매출입력</h3>\n\n    <br/>\n    <div class=\"container\" *ngIf=\"invoice\">\n        {{invoice.in_date}}, {{invoice.invoice}}<br/>\n        {{invoice.seller}}, {{invoice.deal_type}} <br/>\n        <b>{{invoice.item}}</b>, {{invoice.origin}}, {{invoice.uint}}, {{invoice.quality}}, {{invoice.weight}}<br/>          \n        {{invoice.in_number | number}}, {{invoice.out_number | number}}, {{invoice.out_sum | number}}<br/>  \n\n        <hr/>\n         \n        <table>  \n            <ng-container  *ngFor=\"let unstoring of invoice.unstoring\">\n            <tr>  \n                <td width=\"25%\">{{unstoring.outDate}}</td>\n                <td width=\"10%\" class=\"text-right\">{{unstoring.outNumber | number}}&nbsp;</td>\n                <td width=\"25%\" class=\"text-right\">{{unstoring.outSum | number}}&nbsp;</td>\n                <td width=\"40%\">{{unstoring.outPurchase}}</td>\n            </tr>\n            </ng-container>\n        </table>\n    </div> \n    <br/>\n    <!-- 매출일 OutDate, 매출수량 OutNumber, 매출 금액 OutSum, 매출처 OutPurchase -->\n    <!-- Card container that binds all togather -->  \n  <mat-card>  \n    <!-- Actual content starts from here -->  \n    <mat-card-content>  \n      <form [formGroup]=\"theForm\" (ngSubmit)=\"onFormSubmit(theForm)\">  \n          <table>  \n              <tr>  \n                  <td>  \n                      <mat-form-field class=\"demo-full-width\">  \n                          <input formControlName=\"outDate\" matInput [matDatepicker]=\"picker\" placeholder=\"\" [(ngModel)]=\"mydate\">  \n                          <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>  \n                          <mat-datepicker #picker></mat-datepicker>  \n                      </mat-form-field>  \n                      <mat-error>  \n                          <span *ngIf=\"!theForm.get('outDate').valid && theForm.get('outDate').touched\">날짜를 선택하세요!</span>  \n                      </mat-error>  \n                  </td>  \n              </tr> \n              <tr>  \n                  <td>  \n                      <mat-form-field class=\"demo-full-width\">  \n                          <input formControlName=\"outNumber\" matInput placeholder=\"판매수량\">  \n                      </mat-form-field>  \n                      <mat-error>  \n                          <span *ngIf=\"!theForm.get('outNumber').valid && theForm.get('outNumber').touched\">판매수량(숫자만)을 입력하세요!!!</span>  \n                      </mat-error>  \n                  </td> \n              </tr>\n              <tr> \n                  <td>  \n                      <mat-form-field class=\"demo-full-width\">\n                          <input formControlName=\"outSum\" matInput placeholder=\"판매금액\" >  \n                      </mat-form-field>  \n                      <mat-error>  \n                          <span *ngIf=\"!theForm.get('outSum').valid && theForm.get('outSum').touched\">판매금액(숫자만)을 입력하세요!!!</span>  \n                      </mat-error>  \n                  </td>  \n              </tr>  \n              <tr>  \n                  <td>  \n                      <mat-form-field class=\"demo-full-width\">  \n                          <input formControlName=\"outPurchase\" matInput placeholder=\"판매처\" >\n                      </mat-form-field>  \n                      <mat-error>  \n                          <span *ngIf=\"!theForm.get('outPurchase').valid && theForm.get('outPurchase').touched\">판매처를 입력하세요!!!</span>  \n                      </mat-error>  \n                  </td>  \n              </tr>  \n               \n              <tr>  \n                  <td class=\"content-center\">  \n                      <button mat-raised-button color=\"accent\" [disabled]=\"!theForm.valid\">저장</button>  \n                  </td>  \n              </tr>  \n              <tr>  \n                  <td></td>  \n              </tr>  \n          </table>  \n      </form>  \n\n    </mat-card-content>  \n  </mat-card>  \n    \n</div>\n   "
+module.exports = "<div class=\"page page-invoices\">\n\n  <div class=\"contentBox\">\n    <h3 class=\"contentBoxTop\">매출입력</h3>\n\n    <br/>\n    <div class=\"container\" *ngIf=\"invoice\">\n        {{invoice.in_date}}, {{invoice.invoice}}<br/>\n        {{invoice.seller}}, {{invoice.deal_type}} <br/>\n        <b>{{invoice.item}}</b>, {{invoice.origin}}, {{invoice.uint}}, {{invoice.quality}}, {{invoice.weight}}<br/>          \n        {{invoice.in_number | number}}, {{invoice.out_number | number}}, {{invoice.out_sum | number}}<br/>  \n\n        <hr/>\n         \n        <table>  \n            <ng-container  *ngFor=\"let unstoring of invoice.unstoring; trackBy: trackElement \">\n            <tr>  \n                <td width=\"25%\">{{unstoring.outDate}}</td>\n                <td width=\"10%\" class=\"text-right\">{{unstoring.outNumber | number}}&nbsp;</td>\n                <td width=\"25%\" class=\"text-right\">{{unstoring.outSum | number}}&nbsp;</td>\n                <td width=\"40%\">{{unstoring.outPurchase}}</td>\n            </tr>            \n            </ng-container>\n        </table>\n    </div> \n    <br/>\n    <!-- 매출일 OutDate, 매출수량 OutNumber, 매출 금액 OutSum, 매출처 OutPurchase -->\n    <!-- Card container that binds all togather -->  \n  <mat-card>  \n    <!-- Actual content starts from here -->  \n    <mat-card-content>  \n      <form [formGroup]=\"theForm\" (ngSubmit)=\"onFormSubmit(theForm)\">  \n          <table>  \n              <tr>  \n                  <td>  \n                      <mat-form-field class=\"demo-full-width\">  \n                          <input formControlName=\"outDate\" matInput [matDatepicker]=\"picker\" placeholder=\"\" [(ngModel)]=\"mydate\">  \n                          <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>  \n                          <mat-datepicker #picker></mat-datepicker>  \n                      </mat-form-field>  \n                      <mat-error>  \n                          <span *ngIf=\"!theForm.get('outDate').valid && theForm.get('outDate').touched\">날짜를 선택하세요!</span>  \n                      </mat-error>  \n                  </td>  \n              </tr> \n              <tr>  \n                  <td>  \n                      <mat-form-field class=\"demo-full-width\">  \n                          <input formControlName=\"outNumber\" matInput placeholder=\"판매수량\">  \n                      </mat-form-field>  \n                      <mat-error>  \n                          <span *ngIf=\"!theForm.get('outNumber').valid && theForm.get('outNumber').touched\">판매수량(숫자만)을 입력하세요!!!</span>  \n                      </mat-error>  \n                  </td> \n              </tr>\n              <tr> \n                  <td>  \n                      <mat-form-field class=\"demo-full-width\">\n                          <input formControlName=\"outSum\" matInput placeholder=\"판매금액\" >  \n                      </mat-form-field>  \n                      <mat-error>  \n                          <span *ngIf=\"!theForm.get('outSum').valid && theForm.get('outSum').touched\">판매금액(숫자만)을 입력하세요!!!</span>  \n                      </mat-error>  \n                  </td>  \n              </tr>  \n              <tr>  \n                  <td>  \n                      <mat-form-field class=\"demo-full-width\">  \n                          <input formControlName=\"outPurchase\" matInput placeholder=\"판매처\" >\n                      </mat-form-field>  \n                      <mat-error>  \n                          <span *ngIf=\"!theForm.get('outPurchase').valid && theForm.get('outPurchase').touched\">판매처를 입력하세요!!!</span>  \n                      </mat-error>  \n                  </td>  \n              </tr>  \n               \n              <tr>  \n                  <td class=\"content-center\">  \n                      <button mat-raised-button color=\"accent\" [disabled]=\"!theForm.valid\">저장</button>  \n                  </td>  \n              </tr>  \n              <tr>  \n                  <td></td>  \n              </tr>  \n          </table>  \n      </form>  \n\n    </mat-card-content>  \n  </mat-card>  \n    \n</div>\n   "
 
 /***/ }),
 
@@ -6127,6 +6127,7 @@ var InvoiceUnstoringComponent = /** @class */ (function () {
         this.utilService = utilService;
         this.formBuilder = formBuilder;
         this.unstoringService = unstoringService;
+        this.unstorings = [];
         this.mydate = new Date();
         // 매출일 OutDate, 매출수량 OutNumber, 매출 금액 OutSum, 매출처 OutPurchase
         this.outDate = ''; // Date = new Date();
@@ -6145,6 +6146,12 @@ var InvoiceUnstoringComponent = /** @class */ (function () {
                 _this.theForm.reset();
                 //this.theForm.markAsPristine();
                 //this.theForm.markAsUntouched();
+                _this.theForm.setValue({
+                    outDate: new Date(),
+                    outNumber: null,
+                    outSum: null,
+                    outPurchase: ''
+                });
                 _this.id = _this.route.snapshot.queryParams['id'];
                 _this.invoiceService.getitem(_this.id).
                     then(function (data) {
@@ -6161,6 +6168,7 @@ var InvoiceUnstoringComponent = /** @class */ (function () {
         // .catch(response => null);
     }
     InvoiceUnstoringComponent.prototype.ngOnInit = function () {
+        console.log(this.unstorings);
     };
     InvoiceUnstoringComponent.prototype.onFormSubmit = function (form) {
         var _this = this;
@@ -6196,6 +6204,24 @@ var InvoiceUnstoringComponent = /** @class */ (function () {
             _this.errorResponse = response;
             //this.utilService.handleFormSubmitError(this.errorResponse, form, formErrors);
         });
+    };
+    InvoiceUnstoringComponent.prototype.trackElement = function (index, element) {
+        console.log(element);
+        var unstoring = new unstoring(element);
+        this.unstorings[index] = unstoring;
+        //return element ? element.guid : null;
+    };
+    InvoiceUnstoringComponent.prototype.getTotalCount = function () {
+        var count = 0;
+        // for(let unstoring of this.invoice.unstoring){
+        //   var unstoring = new  Unstoring(unstoring);
+        //   count += unstoring.outNumber;
+        // }
+        return count;
+    };
+    InvoiceUnstoringComponent.prototype.getTotalSum = function () {
+        var sum = 0;
+        return sum;
     };
     InvoiceUnstoringComponent.prototype._to2digit = function (n) {
         return ('00' + n).slice(-2);
@@ -6258,8 +6284,8 @@ var InvoiceService = /** @class */ (function () {
         this.utilService = utilService;
         this.apiBaseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiBaseUrl + "/invoices";
     }
-    InvoiceService.prototype.getlist = function (storeName) {
-        return this.http.get(this.apiBaseUrl + "/getlist/" + storeName)
+    InvoiceService.prototype.getlist = function (sellerNo) {
+        return this.http.get(this.apiBaseUrl + "/getlist/" + sellerNo)
             .toPromise()
             .then(this.utilService.checkSuccess)
             .then(function (response) {
@@ -6362,21 +6388,20 @@ var InvoiceComponent = /** @class */ (function () {
         if (!this.authService.getCurrentUser()) {
             this.authService.me()
                 .then(function (seller) {
-                _this.storeName = seller.storeName;
+                _this.sellerNo = seller.sellerNo;
                 _this.ngOnInit();
             })
                 .catch(function (err) { return console.log(err); });
         }
         else
-            this.storeName = this.authService.getCurrentUser().storeName;
+            this.sellerNo = this.authService.getCurrentUser().sellerNo;
     }
     InvoiceComponent.prototype.ngOnInit = function () {
         var _this = this;
-        //this.storeName = '(주)해창트레이딩';
-        this.invoiceService.getlist(this.storeName).
+        this.invoiceService.getlist(this.sellerNo).
             then(function (data) {
             _this.invoices = data;
-            _this.router.navigate(['/invoices'], { queryParams: { storeName: _this.storeName } });
+            _this.router.navigate(['/invoices'], { queryParams: { sellerNo: _this.sellerNo } });
         })
             .catch(function (response) { return null; });
     };
@@ -6527,7 +6552,6 @@ var LoginComponent = /** @class */ (function () {
         var _this = this;
         this.utilService.makeFormDirtyAndUpdateErrors(this.form, this.formErrors, this.formErrorMessages);
         if (this.form.valid) {
-            console.log(this.form.value.userID, this.form.value.password);
             this.authService.login(this.form.value.userID, this.form.value.password)
                 .then(function (data) {
                 _this.router.navigate([_this.redirectTo ? _this.redirectTo : '/']);
