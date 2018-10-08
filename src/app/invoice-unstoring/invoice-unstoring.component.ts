@@ -113,13 +113,10 @@ export class InvoiceUnstoringComponent implements OnInit {
 
     this.unstoringService.create(form.value)
       .then(data => {
-        console.log("1.", data._id);
-        this.updateData(data._id);
-        //this.invoiceSimple.unstoring.push(data._id);
-        console.log("2.", this.invoiceSimple);
+        this.updateData(data._id, data.outNumber, data.outSum);
+        
         this.invoiceService.update(this.id, this.invoiceSimple )
         .then(data => { 
-          console.log("x >", data._id);
           this.router.navigate(['/unstoring'], { queryParams: { id: data._id }})
           .then(nav => {
             console.log(nav);
@@ -128,18 +125,16 @@ export class InvoiceUnstoringComponent implements OnInit {
           });          
         })
         .catch(err => {
-          console.log("3.", err);
           this.errorResponse = err;
         });        
       })
       .catch(response =>{
-        console.log("4.", response);
         this.errorResponse = response; 
         //this.utilService.handleFormSubmitError(this.errorResponse, form, formErrors);
       });
   }
 
-  updateData(id: string) {
+  updateData(id: string, number: number, sum: number) {
     //let count = this.getTotalCount();
     //let sum = this.getTotalSum();
 
@@ -161,8 +156,8 @@ export class InvoiceUnstoringComponent implements OnInit {
     this.invoiceSimple.in_sum = this.invoice.in_sum;
     this.invoiceSimple.seller_no = this.invoice.seller_no;
     this.invoiceSimple.out_date = "";
-    this.invoiceSimple.out_number = this.getTotalCount();
-    this.invoiceSimple.out_sum = this.getTotalSum();
+    this.invoiceSimple.out_number = this.getTotalNumber() + number;
+    this.invoiceSimple.out_sum = this.getTotalSum() + sum;
     this.invoiceSimple.out_purchase = "";
     this.invoiceSimple.unstoring = [] ;
     
@@ -174,14 +169,14 @@ export class InvoiceUnstoringComponent implements OnInit {
     this.invoiceSimple.unstoring[i] = id; // 매출 id 새로 추가
   }
 
-  getTotalCount() {
-    let count = 0;
+  getTotalNumber() {
+    let number = 0;
     let unstoring  = this.invoice.unstoring;
     for(let i=0; i < unstoring.length;i++){
-      count += unstoring[i].outNumber;
+      number += unstoring[i].outNumber;
     }
 
-    return count;
+    return number;
   }
 
   getTotalSum() {

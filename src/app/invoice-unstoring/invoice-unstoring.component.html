@@ -4,16 +4,14 @@
     <h3 class="contentBoxTop">매출입력</h3>
 
     <br/>
-    <div class="container" *ngIf="invoice">
+    <div class="container-fluid"  *ngIf="invoice">
         {{invoice.in_date}}, {{invoice.invoice}}<br/>
         {{invoice.seller}}, {{invoice.deal_type}} <br/>
         <b>{{invoice.item}}</b>, {{invoice.origin}}, {{invoice.uint}}, {{invoice.quality}}, {{invoice.weight}}<br/>          
-        {{invoice.in_number | number}}, {{invoice.out_number | number}}, {{invoice.out_sum | number}}<br/>  
-
-        <hr/>
-         
+        <b>반입: {{invoice.in_number | number}}, 반출: {{invoice.out_number | number}}, 판매금액: {{invoice.out_sum | number}}</b><br/>
+        <br/>         
         <table>  
-            <ng-container  *ngFor="let unstoring of invoice.unstoring; let i=index">
+            <ng-container  *ngFor="let unstoring of invoice.unstoring">
             <tr>  
                 <td width="25%">{{unstoring.outDate}}</td>
                 <td width="10%" class="text-right">{{unstoring.outNumber | number}}&nbsp;</td>

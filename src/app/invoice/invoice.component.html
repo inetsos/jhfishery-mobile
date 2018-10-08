@@ -25,7 +25,7 @@
             {{invoice.in_date}}, {{invoice.invoice}}<br/>
             {{invoice.seller}}, {{invoice.deal_type}} <br/>
             {{invoice.item}}, {{invoice.origin}}, {{invoice.uint}}, {{invoice.quality}}, {{invoice.weight}}<br/>          
-            {{invoice.in_number | number}}, {{invoice.out_number | number}}, {{invoice.out_sum | number}}
+            <b>{{invoice.in_number | number}}, {{invoice.out_number | number}}, {{invoice.out_sum | number}}</b>
           </td>
           <td>
               <a [routerLink]="['/unstoring']" [queryParams]="{ id : invoice._id }" class="btn btn-default">선택</a>
