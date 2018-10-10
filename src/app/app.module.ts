@@ -43,6 +43,7 @@ import { SellerEditComponent } from './seller-edit/seller-edit.component';
 import { SellerShowComponent } from './seller-show/seller-show.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoiceUnstoringComponent } from './invoice-unstoring/invoice-unstoring.component';
+import { InvoiceAllComponent } from './invoice-all/invoice-all.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { InvoiceUnstoringComponent } from './invoice-unstoring/invoice-unstoring
     SellerEditComponent,
     SellerShowComponent,
     InvoiceComponent,
-    InvoiceUnstoringComponent
+    InvoiceUnstoringComponent,
+    InvoiceAllComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, 

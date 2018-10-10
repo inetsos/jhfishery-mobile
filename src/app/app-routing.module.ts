@@ -11,6 +11,7 @@ import { InvoicesResolve } from './invoices.resolve';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LoginComponent } from './login/login.component';
 import { InvoiceComponent } from './invoice/invoice.component';
+import { InvoiceAllComponent } from './invoice-all/invoice-all.component';
 import { SellerNewComponent } from './seller-new/seller-new.component'; 
 import { SellerIndexComponent } from './seller-index/seller-index.component';
 import { SellerShowComponent } from './seller-show/seller-show.component';
@@ -26,6 +27,10 @@ const routes: Routes = [
       { 
         path: '', 
         component: InvoiceComponent
+      },
+      { 
+        path: 'all', 
+        component: InvoiceAllComponent
       }
     ]
   },

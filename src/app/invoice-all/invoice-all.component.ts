@@ -7,19 +7,17 @@ import { UtilService } from '../util.service';
 import { AuthService } from '../auth.service';
 
 @Component({
-  selector: 'app-invoice',
-  templateUrl: './invoice.component.html',
-  styleUrls: ['./invoice.component.css']
+  selector: 'app-invoice-all',
+  templateUrl: './invoice-all.component.html',
+  styleUrls: ['./invoice-all.component.css']
 })
-export class InvoiceComponent implements OnInit {
+export class InvoiceAllComponent implements OnInit {
 
   invoices: Invoice[];
   sellerNo : number;
 
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService,
     private invoiceService: InvoiceService, private utilService: UtilService) { 
-      //this.invoices = this.route.snapshot.data['invoices'];
-      //console.log(localStorage.getItem('currentUser'));
 
       if(!this.authService.getCurrentUser()) {
         this.authService.me()
@@ -33,10 +31,10 @@ export class InvoiceComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.invoiceService.getlist(this.sellerNo).
+    this.invoiceService.getlistAll(this.sellerNo).
       then((data) => {
         this.invoices = data as Invoice[]; 
-        //this.router.navigate(['/invoices'], { queryParams: { sellerNo: this.sellerNo }});
+        //this.router.navigate(['/invoices', 'all'], { queryParams: { sellerNo: this.sellerNo }});
       })
       .catch(response => null);
   }

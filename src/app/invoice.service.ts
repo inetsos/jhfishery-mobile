@@ -26,6 +26,16 @@ export class InvoiceService {
               .catch(this.utilService.handleApiError);
   }
 
+  getlistAll(sellerNo:number): Promise<Invoice[]> {
+    return this.http.get<ApiResponse>(`${this.apiBaseUrl}/getlist/${sellerNo}/all`)
+              .toPromise()
+              .then(this.utilService.checkSuccess)
+              .then(response => {
+                return response.data as Invoice[]
+              })
+              .catch(this.utilService.handleApiError);
+  }
+
   getitem(id:string): Promise<Invoice> {
     return this.http.get<ApiResponse>(`${this.apiBaseUrl}/getitem/${id}`)
               .toPromise()
