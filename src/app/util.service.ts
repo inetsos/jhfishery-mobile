@@ -9,26 +9,37 @@ import { FormGroup } from '@angular/forms';
 export class UtilService {
 
   public checkSuccess(response: any): Promise<any> {
-    if(response.success) return Promise.resolve(response);
-    else return Promise.reject(response);
+    if (response.success)  {
+      return Promise.resolve(response);
+    } else {
+      return Promise.reject(response);
+    }
   }
 
   public handleApiError(error: any): Promise<any> {
-    if(!environment.production) console.error('An error occurred', error);
+    if ( !environment.production ) {
+      console.error('An error occurred', error);
+    }
     return Promise.reject(error);
   }
-  
+
   public updateFormErrors(form: FormGroup, formErrors: any, formErrorMessages: any) {
-    if (!form) { return; }
+    if (!form) {
+      return;
+    }
 
     for (const field in formErrors) {
-      formErrors[field] = '';
-      const control = form.get(field);
-      if (control && control.dirty && !control.valid) {
-        const messages = formErrorMessages[field];
-        if(messages){
-          for (const key in control.errors) {
-            formErrors[field] += messages[key] + ' ';
+      if (form.controls.hasOwnProperty(field)) {
+        formErrors[field] = '';
+        const control = form.get(field);
+        if (control && control.dirty && !control.valid) {
+          const messages = formErrorMessages[field];
+          if (messages) {
+            for (const key in control.errors) {
+              if (control.errors.hasOwnProperty(key)) {
+                formErrors[field] += messages[key] + ' ';
+              }
+            }
           }
         }
       }
@@ -38,9 +49,13 @@ export class UtilService {
   public makeAllFormFieldsDirty(form: FormGroup) {
     if (!form) { return; }
 
-    for (var field in form.controls) {
-      const control = form.get(field);
-      if(control) control.markAsDirty();
+    for (const field in form.controls) {
+      if (form.controls.hasOwnProperty(field)) {
+        const control = form.get(field);
+        if (control) {
+          control.markAsDirty();
+        }
+      }
     }
   }
 
@@ -50,14 +65,16 @@ export class UtilService {
   }
 
   public handleFormSubmitError(response: ApiResponse, form: FormGroup, formErrors: any): void {
-    if(response.errors){
+    if (response.errors) {
       for (const field in formErrors) {
-        const control = form.get(field);
-        if (response.errors[field] && response.errors[field].message) {
-          formErrors[field] += response.errors[field].message;
+        if (formErrors.hasOwnProperty(field)) {
+          const control = form.get(field);
+          if (response.errors[field] && response.errors[field].message) {
+            formErrors[field] += response.errors[field].message;
+          }
         }
       }
-      if(response.errors.unhandled){
+      if (response.errors.unhandled) {
         response.message += response.errors.unhandled;
       }
     }

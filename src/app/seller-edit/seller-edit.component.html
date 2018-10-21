@@ -2,8 +2,8 @@
 
     <div class="buttons">
       <a [routerLink]="['/','sellers',seller.userID]" class="btn btn-default">뒤로</a>
-      <span *ngIf="authService.isLoggedIn() && authService.getCurrentUser()._id == seller._id"
-        (click)="delete()" class="btn btn-default delete">삭제</span>
+      <!-- <span *ngIf="authService.isLoggedIn() && authService.getCurrentUser()._id == seller._id"
+        (click)="delete()" class="btn btn-default delete">삭제</span> -->
     </div>
   
     <form class="user-form form-horizontal" [formGroup]="form" (ngSubmit)="submit()" class="login-form form-horizontal" >

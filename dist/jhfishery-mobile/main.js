@@ -9538,7 +9538,7 @@ module.exports = ".loading-overlay{\r\n    position: fixed;\r\n    top: 0px;\r\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-progress-bar *ngIf=\"loading\" class=\"loading-overlay\" [mode]=\"'indeterminate'\"></mat-progress-bar>\n\n<div class=\"container-fluid\">\n  <div class=\"row\">\n    \n    <nav class=\"navbar navbar-default navbar-custom\">\n      <div class=\"col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2\">\n\n        <div class=\"navbar-header\">\n          <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\">\n            <span class=\"sr-only\">Toggle navigation</span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n          </button>\n          <a [routerLink]=\"['/']\" class=\"navbar-brand\">(주)대구종합수산 - 영업인</a>\n        </div>\n\n        <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n          <ul class=\"nav navbar-nav\">\n            <li [routerLinkActive]=\"['active']\">\n              <a [routerLink]=\"['/','invoices']\">송품장</a>\n            </li>\n          </ul>\n\n          <ul class=\"nav navbar-nav navbar-right\">\n            <li [routerLinkActive]=\"['active']\">\n              <a [routerLink]=\"['/','sellers']\">영업인</a>\n            </li>\n            <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\">\n              <a [routerLink]=\"['/','login']\">로그인</a>\n            </li>\n            <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\">\n              <a [routerLink]=\"['/','sellers','new']\">등록</a>\n            </li>\n            <li *ngIf=\"authService.isLoggedIn()\">\n              <a (click)=\"authService.logout()\">로그아웃</a>\n            </li>\n          </ul>\n\n        </div>\n        \n      </div>\n    </nav>\n    <div class=\"col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2\">\n      <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>"
+module.exports = "<mat-progress-bar *ngIf=\"loading\" class=\"loading-overlay\" [mode]=\"'indeterminate'\"></mat-progress-bar>\n\n<div class=\"container-fluid\">\n  <div class=\"row\">\n    \n    <nav class=\"navbar navbar-default navbar-custom\">\n      <div class=\"col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2\">\n\n        <div class=\"navbar-header\">\n          <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\">\n            <span class=\"sr-only\">Toggle navigation</span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n            <span class=\"icon-bar\"></span>\n          </button>\n          <a [routerLink]=\"['/']\" class=\"navbar-brand\">(주)대구종합수산 - 영업인</a>\n        </div>\n\n        <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n          <ul class=\"nav navbar-nav\">\n            <li [routerLinkActive]=\"['active']\">\n              <a [routerLink]=\"['/','invoices']\">송품장 보기</a>\n            </li>\n          </ul>\n\n          <ul class=\"nav navbar-nav navbar-right\">\n            <li [routerLinkActive]=\"['active']\">\n              <a [routerLink]=\"['/','sellers']\">영업인 보기</a>\n            </li>\n            <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\">\n              <a [routerLink]=\"['/','login']\">  로그인  </a>\n            </li>\n            <!-- <li *ngIf=\"!authService.isLoggedIn()\" [routerLinkActive]=\"['active']\">\n              <a [routerLink]=\"['/','sellers','new']\">등록</a>\n            </li> -->\n            <li *ngIf=\"authService.isLoggedIn()\">\n              <a (click)=\"authService.logout()\"> 로그아웃 </a>\n            </li>\n          </ul>\n\n        </div>\n        \n      </div>\n    </nav>\n    <div class=\"col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2\">\n      <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -10173,7 +10173,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"page page-invoices\">\n\n  <div class=\"contentBox\">\n    <h3 class=\"contentBoxTop\">매출입력</h3>\n\n    <br/>\n    <div class=\"container-fluid\"  *ngIf=\"invoice\">\n        {{invoice.in_date}}, {{invoice.invoice}}<br/>\n        {{invoice.seller}}, {{invoice.deal_type}} <br/>\n        <b>{{invoice.item}}</b>, {{invoice.origin}}, {{invoice.uint}}, {{invoice.quality}}, {{invoice.weight}}<br/>          \n        <b>반입: {{invoice.in_number | number}}, 반출: {{invoice.out_number | number}}, 판매금액: {{invoice.out_sum | number}}</b><br/>\n        <br/>         \n        <table>  \n            <ng-container  *ngFor=\"let unstoring of invoice.unstoring\">\n            <tr>  \n                <td width=\"25%\">{{unstoring.outDate}}</td>\n                <td width=\"10%\" class=\"text-right\">{{unstoring.outNumber | number}}&nbsp;</td>\n                <td width=\"25%\" class=\"text-right\">{{unstoring.outSum | number}}&nbsp;</td>\n                <td width=\"40%\">{{unstoring.outPurchase}}</td>            \n            </tr>            \n            </ng-container>\n        </table>\n    </div> \n    <br/>\n    <!-- 매출일 OutDate, 매출수량 OutNumber, 매출 금액 OutSum, 매출처 OutPurchase -->\n    <!-- Card container that binds all togather -->  \n  <mat-card>  \n    <!-- Actual content starts from here -->  \n    <mat-card-content>  \n      <form [formGroup]=\"theForm\" (ngSubmit)=\"onFormSubmit(theForm)\">  \n          <table>  \n              <tr>  \n                  <td>  \n                      <mat-form-field class=\"demo-full-width\">  \n                          <input formControlName=\"outDate\" matInput [matDatepicker]=\"picker\" placeholder=\"\" [(ngModel)]=\"mydate\">  \n                          <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>  \n                          <mat-datepicker #picker></mat-datepicker>  \n                      </mat-form-field>  \n                      <mat-error>  \n                          <span *ngIf=\"!theForm.get('outDate').valid && theForm.get('outDate').touched\">날짜를 선택하세요!</span>  \n                      </mat-error>  \n                  </td>  \n              </tr> \n              <tr>  \n                  <td>  \n                      <mat-form-field class=\"demo-full-width\">  \n                          <input formControlName=\"outNumber\" matInput placeholder=\"판매수량\">  \n                      </mat-form-field>  \n                      <mat-error>  \n                          <span *ngIf=\"!theForm.get('outNumber').valid && theForm.get('outNumber').touched\">판매수량(숫자만)을 입력하세요!!!</span>  \n                      </mat-error>  \n                  </td> \n              </tr>\n              <tr> \n                  <td>  \n                      <mat-form-field class=\"demo-full-width\">\n                          <input formControlName=\"outSum\" matInput placeholder=\"판매금액\" >  \n                      </mat-form-field>  \n                      <mat-error>  \n                          <span *ngIf=\"!theForm.get('outSum').valid && theForm.get('outSum').touched\">판매금액(숫자만)을 입력하세요!!!</span>  \n                      </mat-error>  \n                  </td>  \n              </tr>  \n              <tr>  \n                  <td>  \n                      <mat-form-field class=\"demo-full-width\">  \n                          <input formControlName=\"outPurchase\" matInput placeholder=\"판매처\" >\n                      </mat-form-field>  \n                      <mat-error>  \n                          <span *ngIf=\"!theForm.get('outPurchase').valid && theForm.get('outPurchase').touched\">판매처를 입력하세요!!!</span>  \n                      </mat-error>  \n                  </td>  \n              </tr>  \n               \n              <tr>  \n                  <td class=\"content-center\">  \n                      <button mat-raised-button color=\"accent\" [disabled]=\"!theForm.valid\">저장</button>  \n                  </td>  \n              </tr>  \n              <tr>  \n                  <td></td>  \n              </tr>  \n          </table>  \n      </form>  \n\n    </mat-card-content>  \n  </mat-card>  \n    \n</div>\n   "
+module.exports = "<div class=\"page page-invoices\">\n\n  <div class=\"contentBox\">\n    <h3 class=\"contentBoxTop\">매출입력</h3>\n\n    <br/>\n    <div class=\"container-fluid\"  *ngIf=\"invoice\">\n        {{invoice.in_date}}, {{invoice.invoice}}<br/>\n        {{invoice.seller}}, {{invoice.deal_type}} <br/>\n        <b>{{invoice.item}}</b>, {{invoice.origin}}, {{invoice.uint}}, {{invoice.quality}}, {{invoice.weight}}<br/>          \n        <b>반입: {{invoice.in_number | number}}, 반출: {{invoice.out_number | number}}, 판매금액: {{invoice.out_sum | number}}</b><br/>\n        <br/>         \n        <table>  \n            <ng-container  *ngFor=\"let unstoring of invoice.unstoring\">\n            <tr>  \n                <td width=\"25%\">{{unstoring.outDate}}</td>\n                <td width=\"10%\" class=\"text-right\">{{unstoring.outNumber | number}}&nbsp;</td>\n                <td width=\"20%\" class=\"text-right\">{{unstoring.outSum | number}}&nbsp;</td>\n                <td width=\"30%\">{{unstoring.outPurchase}}</td>    \n                <td width=\"15%\"><button class=\"btn btn-default btn-sm\" (click)=\"deleteUnstoring(unstoring._id)\">삭제</button></td>        \n            </tr>            \n            </ng-container>\n        </table>\n    </div> \n    <br/>\n    <!-- 매출일 OutDate, 매출수량 OutNumber, 매출 금액 OutSum, 매출처 OutPurchase -->\n    <!-- Card container that binds all togather -->  \n  <mat-card>  \n    <!-- Actual content starts from here -->  \n    <mat-card-content>  \n      <form [formGroup]=\"theForm\" (ngSubmit)=\"onFormSubmit(theForm)\">  \n          <table>  \n              <tr>  \n                  <td>  \n                      <mat-form-field class=\"demo-full-width\">  \n                          <input formControlName=\"outDate\" matInput [matDatepicker]=\"picker\" placeholder=\"\" [(ngModel)]=\"mydate\">  \n                          <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>  \n                          <mat-datepicker #picker></mat-datepicker>  \n                      </mat-form-field>  \n                      <mat-error>  \n                          <span *ngIf=\"!theForm.get('outDate').valid && theForm.get('outDate').touched\">날짜를 선택하세요!</span>  \n                      </mat-error>  \n                  </td>  \n              </tr> \n              <tr>  \n                  <td>  \n                      <mat-form-field class=\"demo-full-width\">  \n                          <input formControlName=\"outNumber\" matInput placeholder=\"판매수량\">  \n                      </mat-form-field>  \n                      <mat-error>  \n                          <span *ngIf=\"!theForm.get('outNumber').valid && theForm.get('outNumber').touched\">판매수량(숫자만)을 입력하세요!!!</span>  \n                      </mat-error>  \n                  </td> \n              </tr>\n              <tr> \n                  <td>  \n                      <mat-form-field class=\"demo-full-width\">\n                          <input formControlName=\"outSum\" matInput placeholder=\"판매금액\" >  \n                      </mat-form-field>  \n                      <mat-error>  \n                          <span *ngIf=\"!theForm.get('outSum').valid && theForm.get('outSum').touched\">판매금액(숫자만)을 입력하세요!!!</span>  \n                      </mat-error>  \n                  </td>  \n              </tr>  \n              <tr>  \n                  <td>  \n                      <mat-form-field class=\"demo-full-width\">  \n                          <input formControlName=\"outPurchase\" matInput placeholder=\"판매처\" >\n                      </mat-form-field>  \n                      <mat-error>  \n                          <span *ngIf=\"!theForm.get('outPurchase').valid && theForm.get('outPurchase').touched\">판매처를 입력하세요!!!</span>  \n                      </mat-error>  \n                  </td>  \n              </tr>  \n               \n              <tr>  \n                  <td class=\"content-center\">  \n                      <button mat-raised-button color=\"accent\" [disabled]=\"!theForm.valid\">저장</button>  \n                  </td>  \n              </tr>  \n              <tr>  \n                  <td></td>  \n              </tr>  \n          </table>  \n      </form>  \n\n    </mat-card-content>  \n  </mat-card>  \n    \n</div>\n   "
 
 /***/ }),
 
@@ -10242,8 +10242,8 @@ var InvoiceUnstoringComponent = /** @class */ (function () {
             // If it is a NavigationEnd event re-initalise the component
             if (e instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationEnd"]) {
                 _this.theForm.reset();
-                //this.theForm.markAsPristine();
-                //this.theForm.markAsUntouched();
+                // this.theForm.markAsPristine();
+                // this.theForm.markAsUntouched();
                 _this.theForm.setValue({
                     outDate: new Date(),
                     outNumber: null,
@@ -10261,12 +10261,12 @@ var InvoiceUnstoringComponent = /** @class */ (function () {
         // this.id = this.route.snapshot.queryParams['id'];
         // this.invoiceService.getitem(this.id).
         // then((data) => {
-        //   this.invoice = data as Invoice; 
+        //   this.invoice = data as Invoice;
         // })
         // .catch(response => null);
     }
     InvoiceUnstoringComponent.prototype.ngOnInit = function () {
-        //console.log(this.unstorings);
+        // console.log(this.unstorings);
     };
     InvoiceUnstoringComponent.prototype.onFormSubmit = function (form) {
         var _this = this;
@@ -10285,8 +10285,8 @@ var InvoiceUnstoringComponent = /** @class */ (function () {
             .then(function (data) {
             _this.updateData(data._id, data.outNumber, data.outSum);
             _this.invoiceService.update(_this.id, _this.invoiceSimple)
-                .then(function (data) {
-                _this.router.navigate(['/unstoring'], { queryParams: { id: data._id } })
+                .then(function (invoice) {
+                _this.router.navigate(['/unstoring'], { queryParams: { id: invoice._id } })
                     .then(function (nav) {
                     console.log(nav);
                 }, function (err) {
@@ -10299,12 +10299,26 @@ var InvoiceUnstoringComponent = /** @class */ (function () {
         })
             .catch(function (response) {
             _this.errorResponse = response;
-            //this.utilService.handleFormSubmitError(this.errorResponse, form, formErrors);
+            // this.utilService.handleFormSubmitError(this.errorResponse, form, formErrors);
         });
     };
+    InvoiceUnstoringComponent.prototype.deleteUnstoring = function (id) {
+        var _this = this;
+        var answer = confirm('매출 데이터를 삭제하시겠습니까?');
+        if (answer) {
+            this.unstoringService.destroy(id)
+                .then(function (data) {
+                alert('삭제하였습니다.');
+                _this.router.navigate(['/unstoring'], { queryParams: { id: _this.id } });
+            })
+                .catch(function (response) {
+                _this.errorResponse = response;
+            });
+        }
+    };
     InvoiceUnstoringComponent.prototype.updateData = function (id, number, sum) {
-        //let count = this.getTotalCount();
-        //let sum = this.getTotalSum();
+        // let count = this.getTotalCount();
+        // let sum = this.getTotalSum();
         console.log(this.invoiceSimple);
         this.invoiceSimple._id = this.invoice._id;
         this.invoiceSimple.trader = this.invoice.trader;
@@ -10321,10 +10335,10 @@ var InvoiceUnstoringComponent = /** @class */ (function () {
         this.invoiceSimple.in_number = this.invoice.in_number;
         this.invoiceSimple.in_sum = this.invoice.in_sum;
         this.invoiceSimple.seller_no = this.invoice.seller_no;
-        this.invoiceSimple.out_date = "";
+        this.invoiceSimple.out_date = '';
         this.invoiceSimple.out_number = this.getTotalNumber() + number;
         this.invoiceSimple.out_sum = this.getTotalSum() + sum;
-        this.invoiceSimple.out_purchase = "";
+        this.invoiceSimple.out_purchase = '';
         this.invoiceSimple.unstoring = [];
         var i = 0;
         for (i = 0; i < this.invoice.unstoring.length; i++) {
@@ -10781,7 +10795,7 @@ module.exports = ".buttons .delete {\r\n    color: #860505;\r\n    float: right;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"page page-sellers\">\n\n    <div class=\"buttons\">\n      <a [routerLink]=\"['/','sellers',seller.userID]\" class=\"btn btn-default\">뒤로</a>\n      <span *ngIf=\"authService.isLoggedIn() && authService.getCurrentUser()._id == seller._id\"\n        (click)=\"delete()\" class=\"btn btn-default delete\">삭제</span>\n    </div>\n  \n    <form class=\"user-form form-horizontal\" [formGroup]=\"form\" (ngSubmit)=\"submit()\" class=\"login-form form-horizontal\" >\n      <div class=\"contentBox\">\n        <h3 class=\"contentBoxTop\">영업인 수정</h3>\n\n        <fieldset>\n          <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.currentPassword}\">\n            <label for=\"currentPassword\" class=\"col-sm-12 control-label\">현재 비밀번호*</label>\n            <div class=\"col-sm-9 col-sm-offset-3\">\n              <input class=\"form-control\" type=\"password\" formControlName=\"currentPassword\" id=\"currentPassword\">\n              <span *ngIf=\"formErrors.currentPassword\" class=\"help-block\">{{formErrors.currentPassword}}</span>\n            </div>\n          </div>\n          <hr/>\n\n          <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.userID}\">\n            <label for=\"userID\" class=\"col-sm-3 control-label\">아이디*</label>\n            <div class=\"col-sm-9\">\n              <input class=\"form-control\" type=\"text\" formControlName=\"userID\" id=\"userID\">\n              <span *ngIf=\"formErrors.userID\" class=\"help-block\">{{formErrors.userID}}</span>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <label for=\"name\" class=\"col-sm-3 control-label\">이름</label>\n            <div class=\"col-sm-9\">\n              <input class=\"form-control\" type=\"text\" formControlName=\"name\" id=\"name\">\n            </div>\n          </div>\n\n          <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.sellerNo}\">\n            <label for=\"sellerNo\" class=\"col-sm-3 control-label\">영업인번호*</label>\n            <div class=\"col-sm-9\">\n              <input class=\"form-control\" type=\"text\" formControlName=\"sellerNo\" id=\"sellerNo\">\n              <span *ngIf=\"formErrors.sellerNo\" class=\"help-block\">{{formErrors.sellerNo}}</span>\n            </div>\n          </div>\n\n          <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.storeName}\">\n            <label for=\"storeName\" class=\"col-sm-3 control-label\">상호*</label>\n            <div class=\"col-sm-9\">\n              <input class=\"form-control\" type=\"text\" formControlName=\"storeName\" id=\"storeName\">\n              <span *ngIf=\"formErrors.storeName\" class=\"help-block\">{{formErrors.storeName}}</span>\n            </div>\n          </div>\n\n          <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.phone}\">\n            <label for=\"phone\" class=\"col-sm-3 control-label\">전화번호*</label>\n            <div class=\"col-sm-9\">\n              <input class=\"form-control\" type=\"text\" formControlName=\"phone\" id=\"phone\">\n              <span *ngIf=\"formErrors.phone\" class=\"help-block\">{{formErrors.phone}}</span>\n            </div>\n          </div>\n\n          <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.email}\">\n            <label for=\"email\" class=\"col-sm-3 control-label\">메일</label>\n            <div class=\"col-sm-9\">\n              <input class=\"form-control\" type=\"text\" formControlName=\"email\" id=\"email\">\n              <span *ngIf=\"formErrors.email\" class=\"help-block\">{{formErrors.email}}</span>\n            </div>\n          </div>\n\n          <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.newPassword}\">\n            <label for=\"newPassword\" class=\"col-sm-12 control-label\">새 비밀번호</label>\n            <div class=\"col-sm-9 col-sm-offset-3\">\n              <input class=\"form-control\" type=\"password\" formControlName=\"newPassword\" id=\"newPassword\">\n              <span *ngIf=\"formErrors.newPassword\" class=\"help-block\">{{formErrors.newPassword}}</span>\n            </div>\n          </div>\n\n          <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.confirmPassword}\">\n            <label for=\"confirmPassword\" class=\"col-sm-12 control-label\">비밀번호 확인</label>\n            <div class=\"col-sm-9 col-sm-offset-3\">\n              <input class=\"form-control\" type=\"password\" formControlName=\"confirmPassword\" id=\"confirmPassword\">\n              <span *ngIf=\"formErrors.confirmPassword\" class=\"help-block\">{{formErrors.confirmPassword}}</span>\n            </div>\n          </div>\n\n          <p>\n            <small>*필수항목</small>\n          </p>\n        </fieldset>\n\n        <div *ngIf=\"errorResponse?.message\" class=\"alert alert-danger\">\n          {{errorResponse?.message}}\n        </div>\n      </div>\n      <div class=\"buttons\">\n        <button type=\"submit\" class=\"btn btn-default\">확인</button>\n      </div>\n    </form>\n  \n</div>\n  "
+module.exports = "<div class=\"page page-sellers\">\n\n    <div class=\"buttons\">\n      <a [routerLink]=\"['/','sellers',seller.userID]\" class=\"btn btn-default\">뒤로</a>\n      <!-- <span *ngIf=\"authService.isLoggedIn() && authService.getCurrentUser()._id == seller._id\"\n        (click)=\"delete()\" class=\"btn btn-default delete\">삭제</span> -->\n    </div>\n  \n    <form class=\"user-form form-horizontal\" [formGroup]=\"form\" (ngSubmit)=\"submit()\" class=\"login-form form-horizontal\" >\n      <div class=\"contentBox\">\n        <h3 class=\"contentBoxTop\">영업인 수정</h3>\n\n        <fieldset>\n          <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.currentPassword}\">\n            <label for=\"currentPassword\" class=\"col-sm-12 control-label\">현재 비밀번호*</label>\n            <div class=\"col-sm-9 col-sm-offset-3\">\n              <input class=\"form-control\" type=\"password\" formControlName=\"currentPassword\" id=\"currentPassword\">\n              <span *ngIf=\"formErrors.currentPassword\" class=\"help-block\">{{formErrors.currentPassword}}</span>\n            </div>\n          </div>\n          <hr/>\n\n          <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.userID}\">\n            <label for=\"userID\" class=\"col-sm-3 control-label\">아이디*</label>\n            <div class=\"col-sm-9\">\n              <input class=\"form-control\" type=\"text\" formControlName=\"userID\" id=\"userID\">\n              <span *ngIf=\"formErrors.userID\" class=\"help-block\">{{formErrors.userID}}</span>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <label for=\"name\" class=\"col-sm-3 control-label\">이름</label>\n            <div class=\"col-sm-9\">\n              <input class=\"form-control\" type=\"text\" formControlName=\"name\" id=\"name\">\n            </div>\n          </div>\n\n          <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.sellerNo}\">\n            <label for=\"sellerNo\" class=\"col-sm-3 control-label\">영업인번호*</label>\n            <div class=\"col-sm-9\">\n              <input class=\"form-control\" type=\"text\" formControlName=\"sellerNo\" id=\"sellerNo\">\n              <span *ngIf=\"formErrors.sellerNo\" class=\"help-block\">{{formErrors.sellerNo}}</span>\n            </div>\n          </div>\n\n          <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.storeName}\">\n            <label for=\"storeName\" class=\"col-sm-3 control-label\">상호*</label>\n            <div class=\"col-sm-9\">\n              <input class=\"form-control\" type=\"text\" formControlName=\"storeName\" id=\"storeName\">\n              <span *ngIf=\"formErrors.storeName\" class=\"help-block\">{{formErrors.storeName}}</span>\n            </div>\n          </div>\n\n          <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.phone}\">\n            <label for=\"phone\" class=\"col-sm-3 control-label\">전화번호*</label>\n            <div class=\"col-sm-9\">\n              <input class=\"form-control\" type=\"text\" formControlName=\"phone\" id=\"phone\">\n              <span *ngIf=\"formErrors.phone\" class=\"help-block\">{{formErrors.phone}}</span>\n            </div>\n          </div>\n\n          <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.email}\">\n            <label for=\"email\" class=\"col-sm-3 control-label\">메일</label>\n            <div class=\"col-sm-9\">\n              <input class=\"form-control\" type=\"text\" formControlName=\"email\" id=\"email\">\n              <span *ngIf=\"formErrors.email\" class=\"help-block\">{{formErrors.email}}</span>\n            </div>\n          </div>\n\n          <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.newPassword}\">\n            <label for=\"newPassword\" class=\"col-sm-12 control-label\">새 비밀번호</label>\n            <div class=\"col-sm-9 col-sm-offset-3\">\n              <input class=\"form-control\" type=\"password\" formControlName=\"newPassword\" id=\"newPassword\">\n              <span *ngIf=\"formErrors.newPassword\" class=\"help-block\">{{formErrors.newPassword}}</span>\n            </div>\n          </div>\n\n          <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.confirmPassword}\">\n            <label for=\"confirmPassword\" class=\"col-sm-12 control-label\">비밀번호 확인</label>\n            <div class=\"col-sm-9 col-sm-offset-3\">\n              <input class=\"form-control\" type=\"password\" formControlName=\"confirmPassword\" id=\"confirmPassword\">\n              <span *ngIf=\"formErrors.confirmPassword\" class=\"help-block\">{{formErrors.confirmPassword}}</span>\n            </div>\n          </div>\n\n          <p>\n            <small>*필수항목</small>\n          </p>\n        </fieldset>\n\n        <div *ngIf=\"errorResponse?.message\" class=\"alert alert-danger\">\n          {{errorResponse?.message}}\n        </div>\n      </div>\n      <div class=\"buttons\">\n        <button type=\"submit\" class=\"btn btn-default\">확인</button>\n      </div>\n    </form>\n  \n</div>\n  "
 
 /***/ }),
 
@@ -11502,14 +11516,17 @@ var UtilService = /** @class */ (function () {
     function UtilService() {
     }
     UtilService.prototype.checkSuccess = function (response) {
-        if (response.success)
+        if (response.success) {
             return Promise.resolve(response);
-        else
+        }
+        else {
             return Promise.reject(response);
+        }
     };
     UtilService.prototype.handleApiError = function (error) {
-        if (!_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].production)
+        if (!_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].production) {
             console.error('An error occurred', error);
+        }
         return Promise.reject(error);
     };
     UtilService.prototype.updateFormErrors = function (form, formErrors, formErrorMessages) {
@@ -11517,13 +11534,17 @@ var UtilService = /** @class */ (function () {
             return;
         }
         for (var field in formErrors) {
-            formErrors[field] = '';
-            var control = form.get(field);
-            if (control && control.dirty && !control.valid) {
-                var messages = formErrorMessages[field];
-                if (messages) {
-                    for (var key in control.errors) {
-                        formErrors[field] += messages[key] + ' ';
+            if (form.controls.hasOwnProperty(field)) {
+                formErrors[field] = '';
+                var control = form.get(field);
+                if (control && control.dirty && !control.valid) {
+                    var messages = formErrorMessages[field];
+                    if (messages) {
+                        for (var key in control.errors) {
+                            if (control.errors.hasOwnProperty(key)) {
+                                formErrors[field] += messages[key] + ' ';
+                            }
+                        }
                     }
                 }
             }
@@ -11534,9 +11555,12 @@ var UtilService = /** @class */ (function () {
             return;
         }
         for (var field in form.controls) {
-            var control = form.get(field);
-            if (control)
-                control.markAsDirty();
+            if (form.controls.hasOwnProperty(field)) {
+                var control = form.get(field);
+                if (control) {
+                    control.markAsDirty();
+                }
+            }
         }
     };
     UtilService.prototype.makeFormDirtyAndUpdateErrors = function (form, formErrors, formErrorMessages) {
@@ -11546,9 +11570,11 @@ var UtilService = /** @class */ (function () {
     UtilService.prototype.handleFormSubmitError = function (response, form, formErrors) {
         if (response.errors) {
             for (var field in formErrors) {
-                var control = form.get(field);
-                if (response.errors[field] && response.errors[field].message) {
-                    formErrors[field] += response.errors[field].message;
+                if (formErrors.hasOwnProperty(field)) {
+                    var control = form.get(field);
+                    if (response.errors[field] && response.errors[field].message) {
+                        formErrors[field] += response.errors[field].message;
+                    }
                 }
             }
             if (response.errors.unhandled) {
