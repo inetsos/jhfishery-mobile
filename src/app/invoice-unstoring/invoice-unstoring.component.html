@@ -15,9 +15,10 @@
             <tr>  
                 <td width="25%">{{unstoring.outDate}}</td>
                 <td width="10%" class="text-right">{{unstoring.outNumber | number}}&nbsp;</td>
-                <td width="20%" class="text-right">{{unstoring.outSum | number}}&nbsp;</td>
-                <td width="30%">{{unstoring.outPurchase}}</td>    
-                <td width="15%"><button class="btn btn-default btn-sm" (click)="deleteUnstoring(unstoring._id)">삭제</button></td>        
+                <td width="15%" class="text-right">{{unstoring.outPrice | number}}&nbsp;</td>
+                <td width="15%" class="text-right">{{unstoring.outSum | number}}&nbsp;</td>
+                <td width="25%">{{unstoring.outPurchase}}</td>    
+                <td width="10%"><button class="btn btn-default btn-sm" (click)="deleteUnstoring(unstoring._id)">삭제</button></td>        
             </tr>            
             </ng-container>
         </table>
@@ -28,10 +29,10 @@
   <mat-card>  
     <!-- Actual content starts from here -->  
     <mat-card-content>  
-      <form [formGroup]="theForm" (ngSubmit)="onFormSubmit(theForm)">  
-          <table>  
-              <tr>  
-                  <td>  
+        <form [formGroup]="theForm" (ngSubmit)="onFormSubmit(theForm)">  
+            <table>  
+                <tr>  
+                    <td>  
                       <mat-form-field class="demo-full-width">  
                           <input formControlName="outDate" matInput [matDatepicker]="picker" placeholder="" [(ngModel)]="mydate">  
                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>  
@@ -40,9 +41,9 @@
                       <mat-error>  
                           <span *ngIf="!theForm.get('outDate').valid && theForm.get('outDate').touched">날짜를 선택하세요!</span>  
                       </mat-error>  
-                  </td>  
-              </tr> 
-              <tr>  
+                    </td>  
+                </tr> 
+                <tr>  
                   <td>  
                       <mat-form-field class="demo-full-width">  
                           <input formControlName="outNumber" matInput placeholder="판매수량">  
@@ -53,15 +54,22 @@
                   </td> 
               </tr>
               <tr> 
+                    <td>  
+                        <mat-form-field class="demo-full-width">
+                            <input formControlName="outPrice" matInput placeholder="판매단가" >  
+                        </mat-form-field>  
+                        <mat-error>  
+                            <span *ngIf="!theForm.get('outPrice').valid && theForm.get('outPrice').touched">판매단가(숫자만)을 입력하세요!!!</span>  
+                        </mat-error>  
+                    </td>  
+                </tr>  
+              <!-- <tr> 
                   <td>  
                       <mat-form-field class="demo-full-width">
-                          <input formControlName="outSum" matInput placeholder="판매금액" >  
-                      </mat-form-field>  
-                      <mat-error>  
-                          <span *ngIf="!theForm.get('outSum').valid && theForm.get('outSum').touched">판매금액(숫자만)을 입력하세요!!!</span>  
-                      </mat-error>  
+                          <input formControlName="outSum" matInput placeholder="판매금액" readonly >  
+                      </mat-form-field>
                   </td>  
-              </tr>  
+              </tr>   -->
               <tr>  
                   <td>  
                       <mat-form-field class="demo-full-width">  

@@ -8,7 +8,7 @@ export interface InvoiceSimple {
     invoice: string;
     origin: string;
     item: string;
-    unit: number;
+    unit: string;
     quality: string;
     weight: string;
     in_number: number;

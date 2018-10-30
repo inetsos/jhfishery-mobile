@@ -14,27 +14,28 @@ import { AuthService } from '../auth.service';
 export class InvoiceAllComponent implements OnInit {
 
   invoices: Invoice[];
-  sellerNo : number;
+  sellerNo: number;
 
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService,
-    private invoiceService: InvoiceService, private utilService: UtilService) { 
+    private invoiceService: InvoiceService, private utilService: UtilService) {
 
-      if(!this.authService.getCurrentUser()) {
+      if (!this.authService.getCurrentUser()) {
         this.authService.me()
           .then((seller) => {
             this.sellerNo = seller.sellerNo;
             this.ngOnInit();
           })
           .catch((err) => console.log(err));
-      } else 
+      } else {
         this.sellerNo = this.authService.getCurrentUser().sellerNo;
+      }
     }
 
   ngOnInit() {
     this.invoiceService.getlistAll(this.sellerNo).
       then((data) => {
-        this.invoices = data as Invoice[]; 
-        //this.router.navigate(['/invoices', 'all'], { queryParams: { sellerNo: this.sellerNo }});
+        this.invoices = data as Invoice[];
+        // this.router.navigate(['/invoices', 'all'], { queryParams: { sellerNo: this.sellerNo }});
       })
       .catch(response => null);
   }

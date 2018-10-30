@@ -18,12 +18,13 @@ export class UnstoringService {
   ) { }
 
   create(unstoring: Unstoring): Promise<Unstoring> {
-    
+    // 금액을 계산하여 넣자.
+    unstoring.outSum = unstoring.outNumber * unstoring.outPrice;
     return this.http.post<ApiResponse>(`${this.apiBaseUrl}`, unstoring)
               .toPromise()
               .then(this.utilService.checkSuccess)
               .then(response => {
-                return response.data as Unstoring
+                return response.data as Unstoring;
               })
               .catch(this.utilService.handleApiError);
   }
@@ -33,7 +34,7 @@ export class UnstoringService {
               .toPromise()
               .then(this.utilService.checkSuccess)
               .then(response => {
-                return response.data as Unstoring
+                return response.data as Unstoring;
               })
               .catch(this.utilService.handleApiError);
   }

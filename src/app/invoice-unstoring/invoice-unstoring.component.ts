@@ -45,6 +45,7 @@ export class InvoiceUnstoringComponent implements OnInit {
   // 매출일 OutDate, 매출수량 OutNumber, 매출 금액 OutSum, 매출처 OutPurchase
   outDate = ''; // Date = new Date();
   outNumber = 0;
+  outPrice = 0;
   outSum = 0;
   outPurchase = '';
 
@@ -55,7 +56,7 @@ export class InvoiceUnstoringComponent implements OnInit {
       this.theForm = formBuilder.group({
         'outDate' : [null, Validators.required],
         'outNumber' : [null,  [Validators.required, Validators.pattern(/^[0-9]*$/)]],
-        'outSum' : [null,  [Validators.required, Validators.pattern(/^[0-9]*$/)]],
+        'outPrice' : [null,  [Validators.required, Validators.pattern(/^[0-9]*$/)]],
         'outPurchase' : [null, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(40)])]
       });
 
@@ -68,14 +69,13 @@ export class InvoiceUnstoringComponent implements OnInit {
           this.theForm.setValue({
             outDate: new Date(),
             outNumber: null,
-            outSum: null,
+            outPrice: null,
             outPurchase: ''
           });
 
           this.id = this.route.snapshot.queryParams['id'];
           this.invoiceService.getitem(this.id).
           then((data) => {
-
             this.invoice = data as Invoice;
           })
           .catch(response => null);
@@ -104,14 +104,13 @@ export class InvoiceUnstoringComponent implements OnInit {
     this.theForm.setValue({
       outDate: tmp,
       outNumber: this.theForm.get('outNumber').value,
-      outSum:  this.theForm.get('outSum').value,
+      outPrice:  this.theForm.get('outPrice').value,
       outPurchase: this.theForm.get('outPurchase').value
     });
 
     this.unstoringService.create(form.value)
       .then(data => {
-        this.updateData(data._id, data.outNumber, data.outSum);
-
+        this.updateData(data._id, this.getTotalNumber() + data.outNumber, this.getTotalSum() + data.outSum);
         this.invoiceService.update(this.id, this.invoiceSimple )
         .then( invoice => {
           this.router.navigate(['/unstoring'], { queryParams: { id: invoice._id }})
@@ -132,12 +131,21 @@ export class InvoiceUnstoringComponent implements OnInit {
   }
 
   deleteUnstoring(id: string) {
+    // 삭제하면 송품장의 수량과 금액을 수정해야 한다.
     const answer = confirm('매출 데이터를 삭제하시겠습니까?');
     if (answer) {
       this.unstoringService.destroy(id)
-      .then(data => {
-        alert('삭제하였습니다.');
-        this.router.navigate(['/unstoring'], { queryParams: { id: this.id }});
+      .then(unstoring => {
+
+        this.updateData(this.id, this.getTotalNumber() - unstoring.outNumber, this.getTotalSum() - unstoring.outSum);
+        this.invoiceService.update(this.id, this.invoiceSimple )
+        .then( invoice => {
+          alert('삭제하였습니다.');
+          this.router.navigate(['/unstoring'], { queryParams: { id: this.id }});
+        })
+        .catch(err => {
+          this.errorResponse = err;
+        });
       })
       .catch(response => {
         this.errorResponse = response;
@@ -149,7 +157,7 @@ export class InvoiceUnstoringComponent implements OnInit {
     // let count = this.getTotalCount();
     // let sum = this.getTotalSum();
 
-    console.log(this.invoiceSimple);
+    // console.log(this.invoiceSimple);
 
     this.invoiceSimple._id = this.invoice._id;
     this.invoiceSimple.trader = this.invoice.trader;
@@ -167,14 +175,14 @@ export class InvoiceUnstoringComponent implements OnInit {
     this.invoiceSimple.in_sum = this.invoice.in_sum;
     this.invoiceSimple.seller_no = this.invoice.seller_no;
     this.invoiceSimple.out_date = '';
-    this.invoiceSimple.out_number = this.getTotalNumber() + number;
-    this.invoiceSimple.out_sum = this.getTotalSum() + sum;
+    this.invoiceSimple.out_number = number;
+    this.invoiceSimple.out_sum = sum;
     this.invoiceSimple.out_purchase = '';
     this.invoiceSimple.unstoring = [] ;
 
     let i = 0;
     for (i = 0; i < this.invoice.unstoring.length; i++) {
-      console.log(this.invoice.unstoring[i]._id);
+      // console.log(this.invoice.unstoring[i]._id);
       this.invoiceSimple.unstoring[i] = this.invoice.unstoring[i]._id;
     }
     this.invoiceSimple.unstoring[i] = id; // 매출 id 새로 추가

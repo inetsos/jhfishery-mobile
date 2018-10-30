@@ -4,7 +4,8 @@
     <h3 class="contentBoxTop">송품장 - 재고보기</h3>    
    
     <div class="top5 bottom5">
-      <a [routerLink]="['/','invoices','all']" class="btn btn-primary btn-sm">전체 보기</a>
+      <a [routerLink]="['/','invoices']" class="btn btn-warning btn-sm">재고 보기</a>&nbsp;
+      <a [routerLink]="['/','invoices','all']" class="btn btn-primary btn-sm">전체 보기</a>      
     </div>
 
     <!-- <input matInput [matDatepicker]="picker" placeholder="" [(ngModel)]="mydate" (ngModelChange)="anotherDay()">
@@ -31,18 +32,27 @@
             {{invoice.item}}, {{invoice.origin}}, {{invoice.uint}}, {{invoice.quality}}, {{invoice.weight}}<br/>          
             <b>{{invoice.in_number | number}}, {{invoice.out_number | number}}, {{invoice.out_sum | number}}</b>
           </td>
+          <ng-container *ngIf = "invoices[i].in_number !== invoices[i].out_number" >
+            <td>
+                <a [routerLink]="['/unstoring']" [queryParams]="{ id : invoice._id }" class="btn btn-default">선택</a>
+            </td>
+            </ng-container>
+            <ng-container *ngIf = "invoices[i].in_number === invoices[i].out_number" >
+              <td></td>
+            </ng-container>
+          <!--               
           <td>
               <a [routerLink]="['/unstoring']" [queryParams]="{ id : invoice._id }" class="btn btn-default">선택</a>
-          </td>
+          </td> -->
         </tr>
         <ng-container *ngIf = "i < invoices.length-1 && invoices[i].invoice !== invoices[i+1].invoice" >
           <tr>
-            <td colspan="2"><b>{{invoice.in_sum | number}}</b> </td>
+            <td colspan="2">매수금액: <b>{{invoice.in_sum | number}}</b> &nbsp; 매출금액: <b>{{invoice.out_sum | number}}</b> </td>
           </tr>
         </ng-container>
         <ng-container *ngIf = "i === invoices.length-1" >
             <tr>
-              <td colspan="2"><b>{{invoice.in_sum | number}}</b> </td>
+              <td colspan="2">매수금액: <b>{{invoice.in_sum | number}}</b> &nbsp; 매출금액: <b>{{invoice.out_sum | number}}</b> </td>
             </tr>
           </ng-container>
       </ng-container>
