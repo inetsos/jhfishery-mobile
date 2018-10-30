@@ -14,31 +14,45 @@ import { AuthService } from '../auth.service';
 export class InvoiceComponent implements OnInit {
 
   invoices: Invoice[];
-  sellerNo : number;
+  sellerNo: number;
 
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService,
-    private invoiceService: InvoiceService, private utilService: UtilService) { 
-      //this.invoices = this.route.snapshot.data['invoices'];
-      //console.log(localStorage.getItem('currentUser'));
+    private invoiceService: InvoiceService, private utilService: UtilService) {
+      // this.invoices = this.route.snapshot.data['invoices'];
+      // console.log(localStorage.getItem('currentUser'));
 
-      if(!this.authService.getCurrentUser()) {
+      if (!this.authService.getCurrentUser()) {
         this.authService.me()
           .then((seller) => {
             this.sellerNo = seller.sellerNo;
             this.ngOnInit();
           })
           .catch((err) => console.log(err));
-      } else 
+      } else {
         this.sellerNo = this.authService.getCurrentUser().sellerNo;
+      }
     }
 
   ngOnInit() {
     this.invoiceService.getlist(this.sellerNo).
       then((data) => {
-        this.invoices = data as Invoice[]; 
-        //this.router.navigate(['/invoices'], { queryParams: { sellerNo: this.sellerNo }});
+        this.invoices = data as Invoice[];
+        // this.router.navigate(['/invoices'], { queryParams: { sellerNo: this.sellerNo }});
       })
       .catch(response => null);
+  }
+
+  getTotalSum(invoice: string) {
+
+    let sum = 0;
+
+    for (let i = 0; i < this.invoices.length; i++) {
+      if (this.invoices[i].invoice === invoice) {
+        sum += this.invoices[i].out_sum;
+      }
+    }
+
+    return sum;
   }
 
 }
