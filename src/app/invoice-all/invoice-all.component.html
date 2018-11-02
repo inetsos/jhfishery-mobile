@@ -28,7 +28,7 @@
         <ng-container *ngFor="let invoice of invoices; let i = index;" >
         <tr>
           <td>
-            {{invoice.in_date}}, {{invoice.invoice}}<br/>
+            {{invoice.in_date}}, <b>{{invoice.invoice}}</b><br/>
             {{invoice.seller}}, {{invoice.deal_type}} <br/>
             {{invoice.item}}, {{invoice.origin}}, {{invoice.uint}}, {{invoice.quality}}, {{invoice.weight}}<br/>          
             <b>{{invoice.in_number | number}}, {{invoice.out_number | number}}, {{invoice.out_sum | number}}</b>
@@ -39,6 +39,7 @@
           </td>
           </ng-container>
           <ng-container *ngIf = "invoices[i].in_number === invoices[i].out_number" >
+            <!-- <td><a [routerLink]="['/unstoring']" [queryParams]="{ id : invoice._id }" class="btn btn-default">선택</a></td> -->
             <td></td>
           </ng-container>
         </tr>

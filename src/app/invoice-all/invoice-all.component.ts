@@ -40,16 +40,16 @@ export class InvoiceAllComponent implements OnInit {
       .catch(response => null);
   }
 
-  getTotalSum(invoice: string) {
+  getTotalSum(invoice: string): number {
 
     let sum = 0;
-
     for (let i = 0; i < this.invoices.length; i++) {
       if (this.invoices[i].invoice === invoice) {
-        sum += this.invoices[i].out_sum;
+        for (let j = 0; j < this.invoices[i].unstoring.length; j++) {
+          sum += this.invoices[i].unstoring[j].outSum;
+        }
       }
     }
-
     return sum;
   }
 

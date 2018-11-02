@@ -1,6 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+@media print {
+    body {
+       -webkit-print-color-adjust: exact;
+    }
+}
+
 body {
     color: #0C2E2B;
 }

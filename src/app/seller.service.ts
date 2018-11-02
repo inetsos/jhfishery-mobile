@@ -12,18 +12,18 @@ import { Seller } from './seller';
 export class SellerService {
 
   private apiBaseUrl = `${environment.apiBaseUrl}/sellers`;
-  
+
   constructor(
     private http: HttpClient,
     private utilService: UtilService,
   ) { }
 
-  index() : Promise<Seller[]> {
+  index(): Promise<Seller[]> {
     return this.http.get<ApiResponse>(`${this.apiBaseUrl}`)
               .toPromise()
               .then(this.utilService.checkSuccess)
               .then(response => {
-                return response.data as Seller[]
+                return response.data as Seller[];
               })
               .catch(this.utilService.handleApiError);
   }
@@ -33,7 +33,7 @@ export class SellerService {
               .toPromise()
               .then(this.utilService.checkSuccess)
               .then(response => {
-                return response.data as Seller
+                return response.data as Seller;
               })
               .catch(this.utilService.handleApiError);
   }
@@ -43,7 +43,7 @@ export class SellerService {
               .toPromise()
               .then(this.utilService.checkSuccess)
               .then(response => {
-                return response.data as Seller
+                return response.data as Seller;
               })
               .catch(this.utilService.handleApiError);
   }
@@ -53,7 +53,7 @@ export class SellerService {
               .toPromise()
               .then(this.utilService.checkSuccess)
               .then(response => {
-                return response.data as Seller
+                return response.data as Seller;
               })
               .catch(this.utilService.handleApiError);
   }
@@ -63,7 +63,7 @@ export class SellerService {
               .toPromise()
               .then(this.utilService.checkSuccess)
               .then(response => {
-                return response.data as Seller
+                return response.data as Seller;
               })
               .catch(this.utilService.handleApiError);
   }

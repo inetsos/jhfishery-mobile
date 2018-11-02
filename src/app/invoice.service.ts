@@ -16,32 +16,35 @@ export class InvoiceService {
 
   constructor( private http: HttpClient, private utilService: UtilService) { }
 
-  getlist(sellerNo:number): Promise<Invoice[]> {
+  getlist(sellerNo: number): Promise<Invoice[]> {
+    // console.log(`${this.apiBaseUrl}/getlist/${sellerNo}`);
     return this.http.get<ApiResponse>(`${this.apiBaseUrl}/getlist/${sellerNo}`)
               .toPromise()
               .then(this.utilService.checkSuccess)
               .then(response => {
-                return response.data as Invoice[]
+                // console.log('1.', response);
+                return response.data as Invoice[];
               })
               .catch(this.utilService.handleApiError);
   }
 
-  getlistAll(sellerNo:number): Promise<Invoice[]> {
+  getlistAll(sellerNo: number): Promise<Invoice[]> {
     return this.http.get<ApiResponse>(`${this.apiBaseUrl}/getlist/${sellerNo}/all`)
               .toPromise()
               .then(this.utilService.checkSuccess)
               .then(response => {
-                return response.data as Invoice[]
+                // console.log('2.', response);
+                return response.data as Invoice[];
               })
               .catch(this.utilService.handleApiError);
   }
 
-  getitem(id:string): Promise<Invoice> {
+  getitem(id: string): Promise<Invoice> {
     return this.http.get<ApiResponse>(`${this.apiBaseUrl}/getitem/${id}`)
               .toPromise()
               .then(this.utilService.checkSuccess)
               .then(response => {
-                return response.data as Invoice
+                return response.data as Invoice;
               })
               .catch(this.utilService.handleApiError);
   }
@@ -51,7 +54,7 @@ export class InvoiceService {
               .toPromise()
               .then(this.utilService.checkSuccess)
               .then(response => {
-                return response.data as Invoice
+                return response.data as Invoice;
               })
               .catch(this.utilService.handleApiError);
   }

@@ -9,6 +9,7 @@ import { FormGroup } from '@angular/forms';
 export class UtilService {
 
   public checkSuccess(response: any): Promise<any> {
+    // console.log(response);
     if (response.success)  {
       return Promise.resolve(response);
     } else {

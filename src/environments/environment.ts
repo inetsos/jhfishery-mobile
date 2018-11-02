@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl:"http://jhfishery-api.ebizpia.co.kr:3300/api"
+  apiBaseUrl: 'http://jhfishery-api.ebizpia.co.kr:3300/api'
 };
 
 /*

@@ -27,7 +27,7 @@
         <ng-container *ngFor="let invoice of invoices; let i = index;" >
         <tr>
           <td>
-            {{invoice.in_date}}, {{invoice.invoice}}<br/>
+            {{invoice.in_date}}, <b>{{invoice.invoice}}</b><br/>
             {{invoice.seller}}, {{invoice.deal_type}} <br/>
             {{invoice.item}}, {{invoice.origin}}, {{invoice.uint}}, {{invoice.quality}}, {{invoice.weight}}<br/>          
             <b>{{invoice.in_number | number}}, {{invoice.out_number | number}}, {{invoice.out_sum | number}}</b>
