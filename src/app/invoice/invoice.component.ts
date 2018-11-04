@@ -34,7 +34,8 @@ export class InvoiceComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.invoiceService.getlist(this.sellerNo).
+    // this.invoiceService.getlist(this.sellerNo).
+    this.invoiceService.getlistAll(this.sellerNo).
       then((data) => {
         this.invoices = data as Invoice[];
         // this.router.navigate(['/invoices'], { queryParams: { sellerNo: this.sellerNo }});
@@ -53,5 +54,16 @@ export class InvoiceComponent implements OnInit {
       }
     }
     return sum;
+  }
+
+  getTotalStock(invoice: string): number {
+
+    let stock = 0;
+    for (let i = 0; i < this.invoices.length; i++) {
+      if (this.invoices[i].invoice === invoice) {
+        stock += this.invoices[i].in_number - this.invoices[i].out_number;
+      }
+    }
+    return stock;
   }
 }

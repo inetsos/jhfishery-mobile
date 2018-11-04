@@ -15,23 +15,20 @@
     
     <table class="table table-bordered">
       <thead>
-        <tr>
-          <th width="100%">반입일자, 송장번호 <br/>
-              출하자, 거래형태<br/>
-              품종, 원산지, 거래단량, 등급, 반입중량 <br/>
-              입고수량, 출고수량, 매출금액
+        <tr style="background-color: #eeeeee;">
+          <th colspan="5" width="100%">반입일자, 송장번호, 품종 <br/>
+              출하자, 거래형태, 원산지, 거래단량, 등급, 반입중량 
           </th>
-          <th></th>
       </tr>
       </thead>
       <tbody>
         <ng-container *ngFor="let invoice of invoices; let i = index;" >
         <tr>
-          <td>
-            {{invoice.in_date}}, <b>{{invoice.invoice}}</b><br/>
-            {{invoice.seller}}, {{invoice.deal_type}} <br/>
-            {{invoice.item}}, {{invoice.origin}}, {{invoice.uint}}, {{invoice.quality}}, {{invoice.weight}}<br/>          
-            <b>{{invoice.in_number | number}}, {{invoice.out_number | number}}, {{invoice.out_sum | number}}</b>
+          <td colspan="4">
+            {{invoice.in_date}}, <b>{{invoice.invoice}}</b>, {{invoice.item}}<br/>
+            {{invoice.seller}}, {{invoice.deal_type}}, {{invoice.origin}}, {{invoice.uint}}, {{invoice.quality}}, {{invoice.weight}}<br/>          
+            반입: <b>{{invoice.in_number | number}}</b> 판매: <b>{{invoice.out_number | number}}</b> 
+            재고: <span style='color:blue'><b>{{invoice.in_number - invoice.out_number | number}}</b></span>
           </td>
           <ng-container *ngIf = "invoices[i].in_number !== invoices[i].out_number" >
           <td>
@@ -43,14 +40,23 @@
             <td></td>
           </ng-container>
         </tr>
+        <ng-container  *ngFor="let unstoring of invoice.unstoring">
+        <tr>  
+            <td width="30%">{{unstoring.outDate}}</td>
+            <td width="10%" class="text-right">{{unstoring.outNumber | number}}&nbsp;</td>
+            <td width="20%" class="text-right">{{unstoring.outPrice | number}}&nbsp;</td>
+            <td width="20%" class="text-right">{{unstoring.outSum | number}}&nbsp;</td>
+            <td width="20%">{{unstoring.outPurchase}}</td>    
+        </tr> 
+        </ng-container>
         <ng-container *ngIf = "i < invoices.length-1 && invoices[i].invoice !== invoices[i+1].invoice" >
-          <tr>
-            <td colspan="2">매수금액: <b>{{invoice.in_sum | number}}</b> &nbsp; 매출금액: <b>{{ getTotalSum(invoice.invoice) | number}}</b></td>
+          <tr  style="background-color: #eeeeee;">
+            <td colspan="5">매수금액: <b>{{invoice.in_sum | number}}</b> &nbsp; 매출금액: <b>{{ getTotalSum(invoice.invoice) | number}}</b></td>
           </tr>
         </ng-container>
         <ng-container *ngIf = "i === invoices.length-1" >
-            <tr>
-              <td colspan="2">매수금액: <b>{{invoice.in_sum | number}}</b> &nbsp; 매출금액: <b>{{ getTotalSum(invoice.invoice) | number}}</b></td>
+            <tr style="background-color: #eeeeee;">
+              <td colspan="5">매수금액: <b>{{invoice.in_sum | number}}</b> &nbsp; 매출금액: <b>{{ getTotalSum(invoice.invoice) | number}}</b></td>
             </tr>
           </ng-container>
       </ng-container>
