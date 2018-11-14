@@ -50,13 +50,13 @@
         </tr> 
         </ng-container>
         <ng-container *ngIf = "i < invoices.length-1 && invoices[i].invoice !== invoices[i+1].invoice" >
-          <tr  style="background-color: #eeeeee;">
-            <td colspan="5">매수금액: <b>{{invoice.in_sum | number}}</b> &nbsp; 매출금액: <b>{{ getTotalSum(invoice.invoice) | number}}</b></td>
+          <tr style="background-color: #eeeeee;">
+            <td class="text-right" colspan="5">매수금액: <b>{{invoice.in_sum | number}}</b> &nbsp; 매출금액: <b>{{ getTotalSum(invoice.invoice) | number}}</b></td>
           </tr>
         </ng-container>
         <ng-container *ngIf = "i === invoices.length-1" >
             <tr style="background-color: #eeeeee;">
-              <td colspan="5">매수금액: <b>{{invoice.in_sum | number}}</b> &nbsp; 매출금액: <b>{{ getTotalSum(invoice.invoice) | number}}</b></td>
+              <td class="text-right" colspan="5">매수금액: <b>{{invoice.in_sum | number}}</b> &nbsp; 매출금액: <b>{{ getTotalSum(invoice.invoice) | number}}</b></td>
             </tr>
           </ng-container>
       </ng-container>
