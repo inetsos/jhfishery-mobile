@@ -8,7 +8,8 @@
         {{invoice.in_date}}, {{invoice.invoice}}<br/>
         {{invoice.seller}}, {{invoice.deal_type}} <br/>
         <b>{{invoice.item}}</b>, {{invoice.origin}}, {{invoice.uint}}, {{invoice.quality}}, {{invoice.weight}}<br/>          
-        <b>반입: {{invoice.in_number | number}}, 반출: {{invoice.out_number | number}}, 판매금액: {{invoice.out_sum | number}}</b><br/>
+        반입: {{invoice.in_number | number}}, 반출: {{invoice.out_number | number}}, <b>재고: {{invoice.in_number - invoice.out_number | number}}</b><br/>
+        <b>판매액: {{invoice.out_sum | number}}</b><br/>
         <br/>         
         <table>  
             <ng-container  *ngFor="let unstoring of invoice.unstoring">
@@ -59,7 +60,7 @@
                             <input formControlName="outPrice" matInput placeholder="판매단가" >  
                         </mat-form-field>  
                         <mat-error>  
-                            <span *ngIf="!theForm.get('outPrice').valid && theForm.get('outPrice').touched">판매단가(숫자만)을 입력하세요!!!</span>  
+                            <span *ngIf="!theForm.get('outPrice').valid && theForm.get('outPrice').touched">판매단가(숫자만)를 입력하세요!!!</span>  
                         </mat-error>  
                     </td>  
                 </tr>  
