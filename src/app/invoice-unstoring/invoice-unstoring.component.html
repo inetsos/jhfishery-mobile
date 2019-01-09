@@ -7,7 +7,7 @@
     <div class="container-fluid"  *ngIf="invoice">
         {{invoice.in_date}}, {{invoice.invoice}}<br/>
         {{invoice.seller}}, {{invoice.deal_type}} <br/>
-        <b>{{invoice.item}}</b>, {{invoice.origin}}, {{invoice.uint}}, {{invoice.quality}}, {{invoice.weight}}<br/>          
+        <b>{{invoice.item}}</b>, {{invoice.origin}}, {{invoice.unit}}, {{invoice.quality}}, {{invoice.weight}}<br/>          
         반입: {{invoice.in_number | number}}, 반출: {{invoice.out_number | number}}, <b>재고: {{invoice.in_number - invoice.out_number | number}}</b><br/>
         <b>판매액: {{invoice.out_sum | number}}</b><br/>
         <br/>         

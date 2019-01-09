@@ -26,7 +26,7 @@
           <tr>
             <td colspan="4">
               {{invoice.in_date}}, <b>{{invoice.invoice}}</b>, {{invoice.item}}<br/>
-              {{invoice.seller}}, {{invoice.deal_type}}, {{invoice.origin}}, {{invoice.uint}}, {{invoice.quality}}, {{invoice.weight}}<br/>          
+              {{invoice.seller}}, {{invoice.deal_type}}, {{invoice.origin}}, {{invoice.unit}}, {{invoice.quality}}, {{invoice.weight}}<br/>          
               반입: <b>{{invoice.in_number | number}}</b> 판매: <b>{{invoice.out_number | number}}</b> 
               재고: <span style='color:blue'><b>{{invoice.in_number - invoice.out_number | number}}</b></span>
             </td>
